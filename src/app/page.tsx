@@ -2,8 +2,6 @@
 import { useState, useEffect } from "react";
 import { Facebook, Twitter, Linkedin, Mail, Youtube, Instagram, Github, Smartphone, Code, BookOpen, Users, PenTool, Globe, Zap } from "lucide-react";
 
-
-
 // Set a fixed launch date instead of a relative one to ensure consistent counting
 const calculateTimeLeft = () => {
   // Set launch date to 90 days from now (fixed date for consistency)
@@ -323,7 +321,7 @@ export default function Home() {
       {isPartnershipModalOpen && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div 
-            className="bg-gray-800 rounded-xl border border-blue-500/30 w-full max-w-lg overflow-hidden shadow-2xl"
+            className="bg-gray-800 rounded-xl border border-blue-500/30 w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl"
             style={{animation: "slideIn 0.4s ease-out forwards"}}
           >
             <style jsx>{`
@@ -339,15 +337,6 @@ export default function Home() {
               .tech-highlight {
                 animation: pulse-glow 3s infinite;
               }
-              @media (max-width: 640px) {
-                .partnership-buttons {
-                  flex-direction: column;
-                  gap: 0.75rem;
-                }
-                .partnership-buttons > * {
-                  width: 100%;
-                }
-              }
             `}</style>
             
             <div className="relative">
@@ -358,56 +347,56 @@ export default function Home() {
                 {/* Tech pattern overlay */}
                 <div className="absolute inset-0 opacity-10" style={{backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'}}></div>
               </div>
-              <div className="relative p-6 text-center">
-                <h2 className="text-2xl font-bold mb-2">Partner With TechPoa</h2>
-                <p className="text-blue-100">Join us in shaping the future of tech in Africa</p>
+              <div className="relative p-4 sm:p-6 text-center">
+                <h2 className="text-xl sm:text-2xl font-bold mb-1 sm:mb-2">Partner With TechPoa</h2>
+                <p className="text-blue-100 text-sm sm:text-base">Join us in shaping the future of tech in Africa</p>
               </div>
               <button 
                 onClick={() => setIsPartnershipModalOpen(false)}
-                className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 text-white/80 hover:text-white transition-colors p-1"
                 aria-label="Close dialog"
               >
                 ✕
               </button>
             </div>
             
-            <div className="p-6">
-              <div className="mb-6">
-                <h3 className="text-xl font-semibold mb-3 text-blue-400">We Value Partnerships</h3>
-                <p className="text-gray-300 mb-4">
+            <div className="p-4 sm:p-6">
+              <div className="mb-4 sm:mb-6">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-blue-400">We Value Partnerships</h3>
+                <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
                   Whether you&apos;re a tech company, educational institution, or industry expert, 
                   we&apos;re excited to explore collaboration opportunities with you.
                 </p>
                 
-                <div className="bg-blue-900/30 p-4 rounded-lg mb-6 tech-highlight">
-                  <h4 className="font-medium mb-2 text-blue-300">Partnership Benefits</h4>
-                  <ul className="space-y-2 text-gray-300 text-sm">
+                <div className="bg-blue-900/30 p-3 sm:p-4 rounded-lg mb-4 sm:mb-6 tech-highlight text-sm">
+                  <h4 className="font-medium mb-2 text-blue-300 text-base">Partnership Benefits</h4>
+                  <ul className="space-y-1 sm:space-y-2 text-gray-300">
                     <li className="flex items-start">
-                      <div className="text-blue-400 mr-2 mt-1">✓</div>
+                      <div className="text-blue-400 mr-2 mt-0.5">✓</div>
                       <span>Access to our network of tech professionals and learners</span>
                     </li>
                     <li className="flex items-start">
-                      <div className="text-blue-400 mr-2 mt-1">✓</div>
+                      <div className="text-blue-400 mr-2 mt-0.5">✓</div>
                       <span>Co-branded marketing opportunities and events</span>
                     </li>
                     <li className="flex items-start">
-                      <div className="text-blue-400 mr-2 mt-1">✓</div>
+                      <div className="text-blue-400 mr-2 mt-0.5">✓</div>
                       <span>Collaborative content creation and knowledge sharing</span>
                     </li>
                     <li className="flex items-start">
-                      <div className="text-blue-400 mr-2 mt-1">✓</div>
+                      <div className="text-blue-400 mr-2 mt-0.5">✓</div>
                       <span>Joint development initiatives and innovation projects</span>
                     </li>
                   </ul>
                 </div>
                 
                 <div className="text-center">
-                  <p className="text-gray-300 mb-4">
-                    To discuss partnership opportunities, please contact our partnerships team:
+                  <p className="text-gray-300 mb-2 sm:mb-3 text-sm">
+                    To discuss partnership opportunities, contact us:
                   </p>
                   <a 
                     href="mailto:partnerships@techpoa.com" 
-                    className="text-blue-400 hover:text-blue-300 transition-colors font-medium text-lg inline-block relative group"
+                    className="text-blue-400 hover:text-blue-300 transition-colors font-medium text-base sm:text-lg inline-block relative group"
                   >
                     partnerships@techpoa.com
                     <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform"></span>
@@ -415,19 +404,18 @@ export default function Home() {
                 </div>
               </div>
               
-              <div className="flex justify-center mt-6 partnership-buttons">
+              <div className="flex justify-center mt-6">
                 <button 
                   onClick={() => setIsPartnershipModalOpen(false)}
-                  className="px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-md transition-colors mr-3 sm:mr-3"
+                  className="px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-md transition-colors mr-3"
                 >
                   Close
                 </button>
                 <a 
                   href="mailto:partnerships@techpoa.com"
-                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-md transition-colors relative overflow-hidden group"
+                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-md transition-colors"
                 >
-                  <span className="relative z-10">Email Us Now</span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                  Email Us Now
                 </a>
               </div>
             </div>
