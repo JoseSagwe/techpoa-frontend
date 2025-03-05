@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import { Facebook, Twitter, Linkedin, Mail, Youtube, Instagram, Github, Smartphone, Code, BookOpen, Users, PenTool, Globe, Zap } from "lucide-react";
 
+
+
 // Set a fixed launch date instead of a relative one to ensure consistent counting
 const calculateTimeLeft = () => {
   // Set launch date to 90 days from now (fixed date for consistency)
@@ -329,10 +331,33 @@ export default function Home() {
                 0% { opacity: 0; transform: translateY(20px); }
                 100% { opacity: 1; transform: translateY(0); }
               }
+              @keyframes pulse-glow {
+                0% { box-shadow: 0 0 5px 0px rgba(59, 130, 246, 0.5); }
+                50% { box-shadow: 0 0 20px 5px rgba(59, 130, 246, 0.7); }
+                100% { box-shadow: 0 0 5px 0px rgba(59, 130, 246, 0.5); }
+              }
+              .tech-highlight {
+                animation: pulse-glow 3s infinite;
+              }
+              @media (max-width: 640px) {
+                .partnership-buttons {
+                  flex-direction: column;
+                  gap: 0.75rem;
+                }
+                .partnership-buttons > * {
+                  width: 100%;
+                }
+              }
             `}</style>
             
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-90"></div>
+              <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-white/10 rounded-full blur-3xl"></div>
+                <div className="absolute top-3/4 left-1/3 w-1/3 h-1/3 bg-blue-400/10 rounded-full blur-2xl"></div>
+                {/* Tech pattern overlay */}
+                <div className="absolute inset-0 opacity-10" style={{backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'}}></div>
+              </div>
               <div className="relative p-6 text-center">
                 <h2 className="text-2xl font-bold mb-2">Partner With TechPoa</h2>
                 <p className="text-blue-100">Join us in shaping the future of tech in Africa</p>
@@ -340,6 +365,7 @@ export default function Home() {
               <button 
                 onClick={() => setIsPartnershipModalOpen(false)}
                 className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
+                aria-label="Close dialog"
               >
                 ✕
               </button>
@@ -353,7 +379,7 @@ export default function Home() {
                   we&apos;re excited to explore collaboration opportunities with you.
                 </p>
                 
-                <div className="bg-blue-900/30 p-4 rounded-lg mb-6">
+                <div className="bg-blue-900/30 p-4 rounded-lg mb-6 tech-highlight">
                   <h4 className="font-medium mb-2 text-blue-300">Partnership Benefits</h4>
                   <ul className="space-y-2 text-gray-300 text-sm">
                     <li className="flex items-start">
@@ -381,25 +407,27 @@ export default function Home() {
                   </p>
                   <a 
                     href="mailto:partnerships@techpoa.com" 
-                    className="text-blue-400 hover:text-blue-300 transition-colors font-medium text-lg"
+                    className="text-blue-400 hover:text-blue-300 transition-colors font-medium text-lg inline-block relative group"
                   >
                     partnerships@techpoa.com
+                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform"></span>
                   </a>
                 </div>
               </div>
               
-              <div className="flex justify-center mt-6">
+              <div className="flex justify-center mt-6 partnership-buttons">
                 <button 
                   onClick={() => setIsPartnershipModalOpen(false)}
-                  className="px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-md transition-colors mr-3"
+                  className="px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-md transition-colors mr-3 sm:mr-3"
                 >
                   Close
                 </button>
                 <a 
                   href="mailto:partnerships@techpoa.com"
-                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-md transition-colors"
+                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-md transition-colors relative overflow-hidden group"
                 >
-                  Email Us Now
+                  <span className="relative z-10">Email Us Now</span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                 </a>
               </div>
             </div>
@@ -409,10 +437,44 @@ export default function Home() {
       {/* Animated Logo Header */}
       <div className={`flex justify-center pt-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}>
         <div className="relative">
-          <h1 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
-            Tech<span className="text-blue-400">Poa</span>
-          </h1>
-          <div className="absolute -bottom-1 left-0 w-full h-1 bg-blue-500 animate-pulse"></div>
+          <div className="relative z-10 overflow-hidden">
+            <h1 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 animate-gradient-x">
+              Tech<span className="text-blue-400 relative">
+                Poa
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-typewriter"></span>
+              </span>
+            </h1>
+            <style jsx>{`
+              @keyframes gradient-shift {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+              }
+              .animate-gradient-x {
+                background-size: 200% auto;
+                animation: gradient-shift 3s ease infinite;
+              }
+              @keyframes typewriter {
+                0% { width: 0; }
+                50% { width: 100%; }
+                90% { opacity: 1; }
+                95% { opacity: 0; }
+                100% { opacity: 1; width: 100%; }
+              }
+              .animate-typewriter {
+                animation: typewriter 3.5s ease-in-out infinite;
+              }
+            `}</style>
+          </div>
+          {/* Tech-inspired decorative elements */}
+          <div className="absolute -top-3 -left-6 w-3 h-3 bg-blue-500 rounded-full animate-ping opacity-75"></div>
+          <div className="absolute top-0 -right-5 w-2 h-2 bg-purple-500 rounded-full animate-ping opacity-75" style={{animationDelay: '0.5s'}}></div>
+          <div className="absolute -bottom-3 left-1/3 w-2 h-2 bg-cyan-400 rounded-full animate-ping opacity-75" style={{animationDelay: '1s'}}></div>
+          
+          {/* Circuit-like decorative lines */}
+          <div className="absolute top-1/2 -left-8 w-6 h-0.5 bg-blue-500/50"></div>
+          <div className="absolute top-1/4 -right-8 w-6 h-0.5 bg-purple-500/50"></div>
+          <div className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-cyan-400 to-purple-600"></div>
         </div>
       </div>
 
@@ -581,7 +643,7 @@ export default function Home() {
         </div>
       </div>
 
-    {/* Contact & Social Section */}
+       {/* Contact & Social Section */}
     <div className={`max-w-6xl mx-auto mt-16 sm:mt-20 px-4 sm:px-6 pb-10 sm:pb-16 transition-all duration-1000 delay-900 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           <div className="bg-blue-900/30 border border-blue-800/50 rounded-xl p-4 sm:p-6">
