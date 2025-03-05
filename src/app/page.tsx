@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Facebook, Twitter, Linkedin, Mail, Smartphone, Code, BookOpen, Users, PenTool, Globe, Zap } from "lucide-react";
+import { Facebook, Twitter, Linkedin, Mail, Youtube, Instagram, Github, Smartphone, Code, BookOpen, Users, PenTool, Globe, Zap } from "lucide-react";
 
 // Set a fixed launch date instead of a relative one to ensure consistent counting
 const calculateTimeLeft = () => {
@@ -23,6 +23,23 @@ export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('services');
   
+  // State for modals
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [isPartnershipModalOpen, setIsPartnershipModalOpen] = useState(false);
+  
+  // State for form steps in the quote modal
+  const [quoteStep, setQuoteStep] = useState(1);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    projectType: '',
+    budget: '',
+    timeline: '',
+    description: ''
+  });
+  
   useEffect(() => {
     // Set initial values and visibility only on client side
     setIsVisible(true);
@@ -32,8 +49,52 @@ export default function Home() {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
     
-    return () => clearInterval(timer);
+    // Close modals with escape key
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsQuoteModalOpen(false);
+        setIsPartnershipModalOpen(false);
+      }
+    };
+    
+    window.addEventListener('keydown', handleEsc);
+    
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener('keydown', handleEsc);
+    };
   }, []);
+  
+  // Function to handle form input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+  
+  // Function to handle form submission
+  const handleQuoteSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Here you would typically send the data to your backend
+    console.log('Form submitted:', formData);
+    
+    // Show success message and close modal
+    alert('Your quote request has been submitted. We\'ll contact you soon!');
+    setIsQuoteModalOpen(false);
+    setQuoteStep(1); // Reset step for next time
+  };
+  
+  // Next step in multi-step form
+  const nextStep = () => {
+    setQuoteStep(quoteStep + 1);
+  };
+  
+  // Previous step in multi-step form
+  const prevStep = () => {
+    setQuoteStep(quoteStep - 1);
+  };
 
   const services = [
     { icon: <Code size={24} />, title: "Software Development", description: "Custom applications, websites, and mobile solutions tailored to your business needs" },
@@ -46,6 +107,305 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-900 to-blue-900 text-white">
+      {/* Quote Request Modal */}
+      {isQuoteModalOpen && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div 
+            className="bg-gray-800 rounded-xl border border-blue-500/30 w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl animate-fadeIn"
+            style={{animation: "fadeInScale 0.3s ease-out forwards"}}
+          >
+            <style jsx>{`
+              @keyframes fadeInScale {
+                0% { opacity: 0; transform: scale(0.9); }
+                100% { opacity: 1; transform: scale(1); }
+              }
+            `}</style>
+            
+            <div className="flex justify-between items-center p-5 border-b border-blue-900">
+              <h2 className="text-xl font-bold text-blue-400">Request a Quote</h2>
+              <button 
+                onClick={() => setIsQuoteModalOpen(false)}
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+            
+            <div className="p-5">
+              <div className="mb-6">
+                <div className="w-full bg-gray-700 h-2 rounded-full overflow-hidden">
+                  <div 
+                    className="bg-blue-500 h-full transition-all duration-300 ease-in-out"
+                    style={{ width: `${(quoteStep / 3) * 100}%` }}
+                  ></div>
+                </div>
+                <div className="flex justify-between text-xs text-gray-400 mt-1">
+                  <span>Basic Info</span>
+                  <span>Project Details</span>
+                  <span>Final Details</span>
+                </div>
+              </div>
+              
+              <form onSubmit={handleQuoteSubmit}>
+                {/* Step 1: Basic Info */}
+                {quoteStep === 1 && (
+                  <div className="space-y-4 animate-fadeIn">
+                    <div>
+                      <label className="block text-sm font-medium mb-1 text-blue-300">Your Name*</label>
+                      <input 
+                        type="text" 
+                        name="name" 
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        className="w-full p-3 bg-gray-700/60 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-1 text-blue-300">Email Address*</label>
+                      <input 
+                        type="email" 
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange} 
+                        className="w-full p-3 bg-gray-700/60 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-1 text-blue-300">Phone Number</label>
+                      <input 
+                        type="tel" 
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange} 
+                        className="w-full p-3 bg-gray-700/60 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-1 text-blue-300">Company/Organization</label>
+                      <input 
+                        type="text" 
+                        name="company"
+                        value={formData.company}
+                        onChange={handleInputChange} 
+                        className="w-full p-3 bg-gray-700/60 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                      />
+                    </div>
+                  </div>
+                )}
+                
+                {/* Step 2: Project Details */}
+                {quoteStep === 2 && (
+                  <div className="space-y-4 animate-fadeIn">
+                    <div>
+                      <label className="block text-sm font-medium mb-1 text-blue-300">Type of Project*</label>
+                      <select 
+                        name="projectType"
+                        value={formData.projectType}
+                        onChange={handleInputChange} 
+                        className="w-full p-3 bg-gray-700/60 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                        required
+                      >
+                        <option value="">Select a project type</option>
+                        <option value="website">Website Development</option>
+                        <option value="mobile">Mobile App</option>
+                        <option value="software">Custom Software</option>
+                        <option value="ecommerce">E-commerce Solution</option>
+                        <option value="consultation">Technical Consultation</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-1 text-blue-300">Estimated Budget</label>
+                      <select 
+                        name="budget"
+                        value={formData.budget}
+                        onChange={handleInputChange} 
+                        className="w-full p-3 bg-gray-700/60 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                      >
+                        <option value="">Select your budget range</option>
+                        <option value="under1k">Under $1,000</option>
+                        <option value="1k-5k">$1,000 - $5,000</option>
+                        <option value="5k-10k">$5,000 - $10,000</option>
+                        <option value="10k-25k">$10,000 - $25,000</option>
+                        <option value="25k+">$25,000+</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-1 text-blue-300">Project Timeline</label>
+                      <select 
+                        name="timeline"
+                        value={formData.timeline}
+                        onChange={handleInputChange} 
+                        className="w-full p-3 bg-gray-700/60 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                      >
+                        <option value="">When do you need this completed?</option>
+                        <option value="asap">As soon as possible</option>
+                        <option value="1month">Within 1 month</option>
+                        <option value="3months">Within 3 months</option>
+                        <option value="6months">Within 6 months</option>
+                        <option value="flexible">Flexible</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
+                
+                {/* Step 3: Final Details */}
+                {quoteStep === 3 && (
+                  <div className="space-y-4 animate-fadeIn">
+                    <div>
+                      <label className="block text-sm font-medium mb-1 text-blue-300">Project Description*</label>
+                      <textarea 
+                        name="description"
+                        value={formData.description}
+                        onChange={handleInputChange} 
+                        rows={5} 
+                        className="w-full p-3 bg-gray-700/60 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                        placeholder="Please describe your project requirements, goals, and any specific features you need..."
+                        required
+                      ></textarea>
+                    </div>
+                    <div className="pt-4">
+                      <div className="bg-blue-900/40 rounded-lg p-4 text-sm">
+                        <h4 className="font-medium mb-2 text-blue-300">What happens next?</h4>
+                        <ol className="list-decimal list-inside space-y-1 text-gray-300">
+                          <li>Our team will review your project requirements</li>
+                          <li>We&apos;ll reach out to discuss your needs in more detail</li>
+                          <li>You&apos;ll receive a detailed proposal and quote</li>
+                          <li>Once approved, we&apos;ll begin working on your project</li>
+                        </ol>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {/* Navigation Buttons */}
+                <div className="flex justify-between mt-8">
+                  {quoteStep > 1 ? (
+                    <button 
+                      type="button" 
+                      onClick={prevStep}
+                      className="px-5 py-2 bg-gray-700 hover:bg-gray-600 rounded-md transition-colors"
+                    >
+                      Back
+                    </button>
+                  ) : (
+                    <div></div> // Empty div to maintain flex spacing
+                  )}
+                  
+                  {quoteStep < 3 ? (
+                    <button 
+                      type="button"
+                      onClick={nextStep}
+                      className="px-5 py-2 bg-blue-600 hover:bg-blue-700 rounded-md transition-colors"
+                    >
+                      Continue
+                    </button>
+                  ) : (
+                    <button 
+                      type="submit"
+                      className="px-5 py-2 bg-green-600 hover:bg-green-700 rounded-md transition-colors"
+                    >
+                      Submit Request
+                    </button>
+                  )}
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Partnership Modal */}
+      {isPartnershipModalOpen && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div 
+            className="bg-gray-800 rounded-xl border border-blue-500/30 w-full max-w-lg overflow-hidden shadow-2xl"
+            style={{animation: "slideIn 0.4s ease-out forwards"}}
+          >
+            <style jsx>{`
+              @keyframes slideIn {
+                0% { opacity: 0; transform: translateY(20px); }
+                100% { opacity: 1; transform: translateY(0); }
+              }
+            `}</style>
+            
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-90"></div>
+              <div className="relative p-6 text-center">
+                <h2 className="text-2xl font-bold mb-2">Partner With TechPoa</h2>
+                <p className="text-blue-100">Join us in shaping the future of tech in Africa</p>
+              </div>
+              <button 
+                onClick={() => setIsPartnershipModalOpen(false)}
+                className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+            
+            <div className="p-6">
+              <div className="mb-6">
+                <h3 className="text-xl font-semibold mb-3 text-blue-400">We Value Partnerships</h3>
+                <p className="text-gray-300 mb-4">
+                  Whether you&apos;re a tech company, educational institution, or industry expert, 
+                  we&apos;re excited to explore collaboration opportunities with you.
+                </p>
+                
+                <div className="bg-blue-900/30 p-4 rounded-lg mb-6">
+                  <h4 className="font-medium mb-2 text-blue-300">Partnership Benefits</h4>
+                  <ul className="space-y-2 text-gray-300 text-sm">
+                    <li className="flex items-start">
+                      <div className="text-blue-400 mr-2 mt-1">✓</div>
+                      <span>Access to our network of tech professionals and learners</span>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="text-blue-400 mr-2 mt-1">✓</div>
+                      <span>Co-branded marketing opportunities and events</span>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="text-blue-400 mr-2 mt-1">✓</div>
+                      <span>Collaborative content creation and knowledge sharing</span>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="text-blue-400 mr-2 mt-1">✓</div>
+                      <span>Joint development initiatives and innovation projects</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="text-center">
+                  <p className="text-gray-300 mb-4">
+                    To discuss partnership opportunities, please contact our partnerships team:
+                  </p>
+                  <a 
+                    href="mailto:partnerships@techpoa.com" 
+                    className="text-blue-400 hover:text-blue-300 transition-colors font-medium text-lg"
+                  >
+                    partnerships@techpoa.com
+                  </a>
+                </div>
+              </div>
+              
+              <div className="flex justify-center mt-6">
+                <button 
+                  onClick={() => setIsPartnershipModalOpen(false)}
+                  className="px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-md transition-colors mr-3"
+                >
+                  Close
+                </button>
+                <a 
+                  href="mailto:partnerships@techpoa.com"
+                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-md transition-colors"
+                >
+                  Email Us Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Animated Logo Header */}
       <div className={`flex justify-center pt-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}>
         <div className="relative">
@@ -143,7 +503,10 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-8 text-center">
-            <button className="bg-blue-600 hover:bg-blue-700 transition-colors px-6 py-3 rounded-full font-medium">
+            <button 
+              onClick={() => setIsQuoteModalOpen(true)}
+              className="bg-blue-600 hover:bg-blue-700 transition-colors px-6 py-3 rounded-full font-medium hover:shadow-lg transform hover:-translate-y-1 duration-300"
+            >
               Request a Quote
             </button>
           </div>
@@ -207,27 +570,30 @@ export default function Home() {
             </div>
             
             <div className="text-center">
-              <a href="mailto:partnership@techpoa.com" className="inline-block bg-blue-600 hover:bg-blue-700 transition-colors px-6 py-3 rounded-full font-medium">
+              <button
+                onClick={() => setIsPartnershipModalOpen(true)}
+                className="inline-block bg-blue-600 hover:bg-blue-700 transition-colors px-6 py-3 rounded-full font-medium hover:shadow-lg transform hover:-translate-y-1 duration-300"
+              >
                 Explore Partnership Opportunities
-              </a>
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Contact & Social Section */}
-      <div className={`max-w-6xl mx-auto mt-16 sm:mt-20 px-4 sm:px-6 pb-10 sm:pb-16 transition-all duration-1000 delay-900 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+    {/* Contact & Social Section */}
+    <div className={`max-w-6xl mx-auto mt-16 sm:mt-20 px-4 sm:px-6 pb-10 sm:pb-16 transition-all duration-1000 delay-900 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           <div className="bg-blue-900/30 border border-blue-800/50 rounded-xl p-4 sm:p-6">
             <h3 className="text-lg sm:text-xl font-semibold mb-4">Get In Touch</h3>
             <div className="space-y-3 sm:space-y-4">
               <div className="flex items-center">
                 <Mail size={18} className="text-blue-400 mr-3" />
-                <a href="mailto:contact@techpoa.com" className="text-gray-300 hover:text-blue-300 transition-colors text-sm sm:text-base">contact@techpoa.com</a>
+                <a href="mailto:info@techpoa.com" className="text-gray-300 hover:text-blue-300 transition-colors text-sm sm:text-base">info@techpoa.com</a>
               </div>
               <div className="flex items-center">
                 <Smartphone size={18} className="text-blue-400 mr-3" />
-                <a href="tel:+2547XXXXXXXX" className="text-gray-300 hover:text-blue-300 transition-colors text-sm sm:text-base">+254 7XX XXX XXX</a>
+                <a href="tel:+2547166687177" className="text-gray-300 hover:text-blue-300 transition-colors text-sm sm:text-base">+254 716687177</a>
               </div>
               <div className="flex items-center">
                 <Globe size={18} className="text-blue-400 mr-3" />
@@ -246,6 +612,15 @@ export default function Home() {
                 </a>
                 <a href="#" className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors">
                   <Linkedin size={18} />
+                </a>
+                <a href="#" className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors">
+                  <Youtube size={18} />
+                </a>
+                <a href="#" className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors">
+                  <Instagram size={18} />
+                </a>
+                <a href="#" className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors">
+                  <Github  size={18} />
                 </a>
               </div>
             </div>
