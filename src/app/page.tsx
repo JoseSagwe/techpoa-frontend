@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Facebook, Twitter, Linkedin, Mail, Smartphone, Code, BookOpen, Users, PenTool, Globe, Zap, MessageSquare } from "lucide-react";
+import { Facebook, Twitter, Linkedin, Mail, Smartphone, Code, BookOpen, Users, PenTool, Globe, Zap } from "lucide-react";
 
 // Set a fixed launch date instead of a relative one to ensure consistent counting
 const calculateTimeLeft = () => {
@@ -188,7 +188,7 @@ export default function Home() {
           <div className="bg-blue-900/30 border border-blue-800/50 rounded-xl p-8">
             <h3 className="text-2xl font-semibold mb-4">Partner With Us</h3>
             <p className="text-gray-300 mb-6">
-              At TechPoa Connect, we believe in the power of collaboration. We're actively seeking partnerships with tech companies, educational institutions, and industry experts to expand our ecosystem and provide more value to our users.
+              At TechPoa Connect, we believe in the power of collaboration. We&apos;re actively seeking partnerships with tech companies, educational institutions, and industry experts to expand our ecosystem and provide more value to our users.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -201,7 +201,7 @@ export default function Home() {
               <div className="bg-blue-800/30 p-5 rounded-lg">
                 <h4 className="font-medium mb-2">For Educators</h4>
                 <p className="text-gray-300 text-sm">
-                  Join our platform as an instructor to share your knowledge, build your personal brand, and connect with eager learners.
+                  Don&apos;t miss out on the chance to join our platform as an instructor to share your knowledge, build your personal brand, and connect with eager learners.
                 </p>
               </div>
             </div>
