@@ -25,7 +25,6 @@ const calculateTimeLeft = () => {
 
 export default function Home() {
   // State for launch date and countdown
-  const [launchDate, setLaunchDate] = useState<Date | null>(null);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [isVisible, setIsVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('services');
