@@ -536,7 +536,7 @@ const handleContactSubmit = async (e: React.FormEvent) => {
                   Close
                 </button>
                 <a 
-                  href="mailto:partnerships@techpoa.com?subject=TechPoa%20Partnership%20Inquiry&body=Hello%20TechPoa%20Team,%0A%0AI'm%20interested%20in%20exploring%20partnership%20opportunities%20with%20your%20organization.%0A%0ACompany:%20%0AArea%20of%20Interest:%20%0A%0APlease%20contact%20me%20to%20discuss%20potential%20collaboration.%0A%0ABest%20regards,"
+                  href="mailto:techpoaconnect@gmail.com?subject=TechPoa%20Partnership%20Inquiry&body=Hello%20TechPoa%20Team,%0A%0AI'm%20interested%20in%20exploring%20partnership%20opportunities%20with%20your%20organization.%0A%0ACompany:%20%0AArea%20of%20Interest:%20%0A%0APlease%20contact%20me%20to%20discuss%20potential%20collaboration.%0A%0ABest%20regards,"
                   className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-md transition-colors"
                 >
                   Email Us Now
@@ -822,7 +822,7 @@ const handleContactSubmit = async (e: React.FormEvent) => {
                     <Twitter size={18} />
                   </a>
                   <a 
-                    href="www.linkedin.com/in/techpoa-connect-ba6609355" 
+                    href="https://www.linkedin.com/in/techpoa-connect-ba6609355" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
