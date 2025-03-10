@@ -7,6 +7,7 @@ import {
   type QuoteRequest , submitContactMessage, type ContactMessage
 } from "../services/api";
 import SuccessModal from "@/components/SuccessModal";
+import { useToast } from "@/components/ToastContext";
 
 // Set a fixed launch date instead of a relative one to ensure consistent counting
 const calculateTimeLeft = () => {
@@ -28,6 +29,7 @@ export default function Home() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [isVisible, setIsVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('services');
+  const { showToast } = useToast();
   
   // State for modals
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -78,11 +80,11 @@ const handleContactSubmit = async (e: React.FormEvent) => {
         message: ''
       });
     } else {
-      alert(`Failed to send message: ${response.message}`);
+      showToast(`Sorry, ${response.message}`, 'error');
     }
   } catch (error) {
     console.error('Error:', error);
-    alert('An error occurred. Please try again later.');
+    showToast('An error occurred. Please try again later.', 'error');
   }
 };
 
@@ -202,11 +204,11 @@ const handleContactSubmit = async (e: React.FormEvent) => {
         });
         setQuoteStep(1); // Reset step for next time
       } else {
-        alert(`Failed to submit quote request: ${response.message}`);
+        showToast(`Sorry, ${response.message}`, 'error');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('An error occurred. Please try again later.');
+      showToast('An error occurred. Please try again later.', 'error');
     }
   };
   
