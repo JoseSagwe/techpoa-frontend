@@ -56,19 +56,6 @@ export interface NewsletterSubscriber {
       return { success: false, message: 'Failed to submit quote request. Please try again later.' };
     }
   };
-  
-  // Get launch date
-  export const getLaunchDate = async (): Promise<Date | null> => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/launch/date`);
-      const data: LaunchConfig = await response.json();
-      return new Date(data.launchDate);
-    } catch (error) {
-      console.error('Error fetching launch date:', error);
-      // Return a default date 90 days from now if API fails
-      return new Date(new Date().getTime() + 90 * 24 * 60 * 60 * 1000);
-    }
-  };
 
 
 export interface ContactMessage {

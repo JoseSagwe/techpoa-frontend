@@ -2,15 +2,16 @@
 import { useState, useEffect } from "react";
 import { Facebook, Twitter, Linkedin, Mail, Instagram, Github, Smartphone, Code, BookOpen, Users, PenTool, Globe, Zap } from "lucide-react";
 import { 
-  getLaunchDate, 
   subscribeToNewsletter, 
   submitQuoteRequest,
   type QuoteRequest , submitContactMessage, type ContactMessage
 } from "../services/api";
 import SuccessModal from "@/components/SuccessModal";
 
-// Calculate time left until launch
-const calculateTimeLeft = (launchDate: Date) => {
+// Set a fixed launch date instead of a relative one to ensure consistent counting
+const calculateTimeLeft = () => {
+  // Set launch date to 90 days from now (fixed date for consistency)
+  const launchDate = new Date("2025-06-05T00:00:00"); // You can change this to your actual launch date
   const now = new Date();
   const difference = launchDate.getTime() - now.getTime();
   
@@ -108,22 +109,13 @@ const handleContactSubmit = async (e: React.FormEvent) => {
     // Set visibility after component mounts
     setIsVisible(true);
     
-    // Fetch launch date from API
-    const fetchLaunchDate = async () => {
-      const date = await getLaunchDate();
-      if (date) {
-        setLaunchDate(date);
-        setTimeLeft(calculateTimeLeft(date));
-      }
-    };
-    
-    fetchLaunchDate();
+    // No need to fetch the launch date anymore
+    // Just update the timeLeft immediately
+    setTimeLeft(calculateTimeLeft());
     
     // Update countdown every second
     const timer = setInterval(() => {
-      if (launchDate) {
-        setTimeLeft(calculateTimeLeft(launchDate));
-      }
+      setTimeLeft(calculateTimeLeft());
     }, 1000);
     
     // Close modals with escape key
@@ -140,7 +132,7 @@ const handleContactSubmit = async (e: React.FormEvent) => {
       clearInterval(timer);
       window.removeEventListener('keydown', handleEsc);
     };
-  }, [launchDate]);
+  }, []); // No dependencies needed for the effect
   
   // Function to handle newsletter subscription
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
