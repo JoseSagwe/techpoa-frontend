@@ -1,11 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Facebook, Twitter, Linkedin, Mail, Youtube, Instagram, Github, Smartphone, Code, BookOpen, Users, PenTool, Globe, Zap } from "lucide-react";
+import { Facebook, Twitter, Linkedin, Mail, Instagram, Github, Smartphone, Code, BookOpen, Users, PenTool, Globe, Zap } from "lucide-react";
+import { 
+  getLaunchDate, 
+  subscribeToNewsletter, 
+  submitQuoteRequest,
+  type QuoteRequest , submitContactMessage, type ContactMessage
+} from "../services/api";
+import SuccessModal from "@/components/SuccessModal";
 
-// Set a fixed launch date instead of a relative one to ensure consistent counting
-const calculateTimeLeft = () => {
-  // Set launch date to 90 days from now (fixed date for consistency)
-  const launchDate = new Date("2025-06-05T00:00:00"); // You can change this to your actual launch date
+// Calculate time left until launch
+const calculateTimeLeft = (launchDate: Date) => {
   const now = new Date();
   const difference = launchDate.getTime() - now.getTime();
   
@@ -18,7 +23,8 @@ const calculateTimeLeft = () => {
 };
 
 export default function Home() {
-  // Initialize with zeros to prevent hydration mismatch
+  // State for launch date and countdown
+  const [launchDate, setLaunchDate] = useState<Date | null>(null);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [isVisible, setIsVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('services');
@@ -26,10 +32,67 @@ export default function Home() {
   // State for modals
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [isPartnershipModalOpen, setIsPartnershipModalOpen] = useState(false);
+
+  // Add state for contact form and success modal
+const [contactFormData, setContactFormData] = useState<ContactMessage>({
+  name: '',
+  email: '',
+  message: ''
+});
+
+const [showSuccessModal, setShowSuccessModal] = useState(false);
+const [successModalContent, setSuccessModalContent] = useState({
+  title: '',
+  message: ''
+});
+
+
+// Add handler for contact form input changes
+const handleContactInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const { name, value } = e.target;
+  setContactFormData({
+    ...contactFormData,
+    [name]: value
+  });
+};
+
+// Add handler for contact form submission
+const handleContactSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  
+  try {
+    const response = await submitContactMessage(contactFormData);
+    
+    if (response.success) {
+      // Show success modal
+      setSuccessModalContent({
+        title: "Message Sent!",
+        message: "Thank you for reaching out! Our team will review your message and get back to you shortly."
+      });
+      setShowSuccessModal(true);
+      
+      // Reset form
+      setContactFormData({
+        name: '',
+        email: '',
+        message: ''
+      });
+    } else {
+      alert(`Failed to send message: ${response.message}`);
+    }
+  } catch (error) {
+    alert('An error occurred. Please try again later.');
+  }
+};
+
+  
+  // State for newsletter subscription
+  const [email, setEmail] = useState('');
+  const [submitStatus, setSubmitStatus] = useState<{ type: string, message: string } | null>(null);
   
   // State for form steps in the quote modal
   const [quoteStep, setQuoteStep] = useState(1);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<QuoteRequest>({
     name: '',
     email: '',
     phone: '',
@@ -41,12 +104,25 @@ export default function Home() {
   });
   
   useEffect(() => {
-    // Set initial values and visibility only on client side
+    // Set visibility after component mounts
     setIsVisible(true);
+    
+    // Fetch launch date from API
+    const fetchLaunchDate = async () => {
+      const date = await getLaunchDate();
+      if (date) {
+        setLaunchDate(date);
+        setTimeLeft(calculateTimeLeft(date));
+      }
+    };
+    
+    fetchLaunchDate();
     
     // Update countdown every second
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
+      if (launchDate) {
+        setTimeLeft(calculateTimeLeft(launchDate));
+      }
     }, 1000);
     
     // Close modals with escape key
@@ -63,7 +139,35 @@ export default function Home() {
       clearInterval(timer);
       window.removeEventListener('keydown', handleEsc);
     };
-  }, []);
+  }, [launchDate]);
+  
+  // Function to handle newsletter subscription
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email) {
+      setSubmitStatus({ type: 'error', message: 'Please enter your email address.' });
+      return;
+    }
+    
+    try {
+      const response = await subscribeToNewsletter(email);
+      
+      if (response.success) {
+        setSubmitStatus({ type: 'success', message: 'Successfully subscribed to our newsletter!' });
+        setEmail('');
+      } else {
+        setSubmitStatus({ type: 'error', message: response.message || 'Failed to subscribe. Please try again later.' });
+      }
+    } catch (error) {
+      setSubmitStatus({ type: 'error', message: 'An error occurred. Please try again later.' });
+    }
+    
+    // Clear status after 3 seconds
+    setTimeout(() => {
+      setSubmitStatus(null);
+    }, 3000);
+  };
   
   // Function to handle form input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -75,15 +179,41 @@ export default function Home() {
   };
   
   // Function to handle form submission
-  const handleQuoteSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleQuoteSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Here you would typically send the data to your backend
-    console.log('Form submitted:', formData);
     
-    // Show success message and close modal
-    alert('Your quote request has been submitted. We\'ll contact you soon!');
-    setIsQuoteModalOpen(false);
-    setQuoteStep(1); // Reset step for next time
+    try {
+      const response = await submitQuoteRequest(formData);
+      
+      if (response.success) {
+        // Hide quote modal first
+        setIsQuoteModalOpen(false);
+        
+        // Show success modal with custom message
+        setSuccessModalContent({
+          title: "Quote Request Received!",
+          message: "Thanks for choosing TechPoa! Your quote request has been successfully submitted. Our expert team will carefully review your requirements and get back to you within 24-48 hours with a customized solution tailored to your needs."
+        });
+        setShowSuccessModal(true);
+        
+        // Reset form data
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          projectType: '',
+          budget: '',
+          timeline: '',
+          description: ''
+        });
+        setQuoteStep(1); // Reset step for next time
+      } else {
+        alert(`Failed to submit quote request: ${response.message}`);
+      }
+    } catch (error) {
+      alert('An error occurred. Please try again later.');
+    }
   };
   
   // Next step in multi-step form
@@ -395,7 +525,7 @@ export default function Home() {
                     To discuss partnership opportunities, contact us:
                   </p>
                   <a 
-                    href="mailto:partnerships@techpoa.com" 
+                    href="mailto:techpoaconnect@gmail.com" 
                     className="text-blue-400 hover:text-blue-300 transition-colors font-medium text-base sm:text-lg inline-block relative group"
                   >
                     partnerships@techpoa.com
@@ -412,7 +542,7 @@ export default function Home() {
                   Close
                 </button>
                 <a 
-                  href="mailto:partnerships@techpoa.com"
+                  href="mailto:partnerships@techpoa.com?subject=TechPoa%20Partnership%20Inquiry&body=Hello%20TechPoa%20Team,%0A%0AI'm%20interested%20in%20exploring%20partnership%20opportunities%20with%20your%20organization.%0A%0ACompany:%20%0AArea%20of%20Interest:%20%0A%0APlease%20contact%20me%20to%20discuss%20potential%20collaboration.%0A%0ABest%20regards,"
                   className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-md transition-colors"
                 >
                   Email Us Now
@@ -422,6 +552,7 @@ export default function Home() {
           </div>
         </div>
       )}
+      
       {/* Animated Logo Header */}
       <div className={`flex justify-center pt-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}>
         <div className="relative">
@@ -511,10 +642,29 @@ export default function Home() {
         <div className="bg-white/10 backdrop-blur-md p-4 sm:p-6 rounded-xl border border-blue-500/20">
           <h3 className="text-lg sm:text-xl font-semibold mb-2">Get Notified at Launch</h3>
           <p className="text-blue-200 text-xs sm:text-sm mb-4">Be the first to know when we launch and receive exclusive offers.</p>
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-0">
-            <input type="email" placeholder="Your email address" className="w-full sm:flex-grow p-3 bg-gray-800/60 text-white rounded-md sm:rounded-r-none focus:outline-none" />
-            <button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 transition-colors px-4 py-3 rounded-md sm:rounded-l-none font-medium">Notify Me</button>
-          </div>
+          
+          {/* Newsletter status message */}
+          {submitStatus && (
+            <div className={`p-2 mb-3 rounded-md text-sm ${submitStatus.type === 'success' ? 'bg-green-700/50 text-green-200' : 'bg-red-700/50 text-red-200'}`}>
+              {submitStatus.message}
+            </div>
+          )}
+          
+          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-2 sm:gap-0">
+            <input 
+              type="email" 
+              placeholder="Your email address" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full sm:flex-grow p-3 bg-gray-800/60 text-white rounded-md sm:rounded-r-none focus:outline-none focus:ring-2 focus:ring-blue-500" 
+            />
+            <button 
+              type="submit"
+              className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 transition-colors px-4 py-3 rounded-md sm:rounded-l-none font-medium"
+            >
+              Notify Me
+            </button>
+          </form>
         </div>
       </div>
 
@@ -639,7 +789,12 @@ export default function Home() {
             <div className="space-y-3 sm:space-y-4">
               <div className="flex items-center">
                 <Mail size={18} className="text-blue-400 mr-3" />
-                <a href="mailto:info@techpoa.com" className="text-gray-300 hover:text-blue-300 transition-colors text-sm sm:text-base">info@techpoa.com</a>
+                <a 
+                  href="mailto:techpoaconnect@gmail.com?subject=TechPoa%20Inquiry&body=Hello%20TechPoa%20Team,%0A%0AI'd%20like%20to%20inquire%20about%20your%20services.%0A%0ABest%20regards," 
+                  className="text-gray-300 hover:text-blue-300 transition-colors text-sm sm:text-base"
+                >
+                  info@techpoa.com
+                </a>
               </div>
               <div className="flex items-center">
                 <Smartphone size={18} className="text-blue-400 mr-3" />
@@ -651,49 +806,103 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="mt-5 sm:mt-6">
-              <h4 className="font-medium mb-2 sm:mb-3 text-sm sm:text-base">Follow Us</h4>
-              <div className="flex space-x-3 sm:space-x-4">
-                <a href="#" className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors">
-                  <Facebook size={18} />
-                </a>
-                <a href="#" className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors">
-                  <Twitter size={18} />
-                </a>
-                <a href="#" className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors">
-                  <Linkedin size={18} />
-                </a>
-                <a href="#" className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors">
-                  <Youtube size={18} />
-                </a>
-                <a href="#" className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors">
-                  <Instagram size={18} />
-                </a>
-                <a href="#" className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors">
-                  <Github  size={18} />
-                </a>
+                <div className="mt-5 sm:mt-6">
+                <h4 className="font-medium mb-2 sm:mb-3 text-sm sm:text-base">Follow Us</h4>
+                <div className="flex space-x-3 sm:space-x-4">
+                  <a 
+                    href="https://www.facebook.com/profile.php?id=61573759510352" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
+                    aria-label="Follow us on Facebook"
+                  >
+                    <Facebook size={18} />
+                  </a>
+                  <a 
+                    href="https://x.com/Techpoa_connect" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
+                    aria-label="Follow us on Twitter"
+                  >
+                    <Twitter size={18} />
+                  </a>
+                  <a 
+                    href="www.linkedin.com/in/techpoa-connect-ba6609355" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
+                    aria-label="Connect with us on LinkedIn"
+                  >
+                    <Linkedin size={18} />
+                  </a>
+                  <a 
+                    href="https://www.instagram.com/techpoa_connect" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
+                    aria-label="Follow us on Instagram"
+                  >
+                    <Instagram size={18} />
+                  </a>
+                  <a 
+                    href="https://github.com/techpoa" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
+                    aria-label="Check our code on GitHub"
+                  >
+                    <Github size={18} />
+                  </a>
+                </div>
               </div>
-            </div>
           </div>
           
           <div className="bg-blue-900/30 border border-blue-800/50 rounded-xl p-4 sm:p-6">
-            <h3 className="text-lg sm:text-xl font-semibold mb-4">Send Us a Message</h3>
-            <form className="space-y-3 sm:space-y-4">
-              <div>
-                <input type="text" placeholder="Your Name" className="w-full p-2 sm:p-3 bg-gray-800/60 text-white rounded-md focus:outline-none text-sm sm:text-base" />
-              </div>
-              <div>
-                <input type="email" placeholder="Your Email" className="w-full p-2 sm:p-3 bg-gray-800/60 text-white rounded-md focus:outline-none text-sm sm:text-base" />
-              </div>
-              <div>
-                <textarea placeholder="Your Message" rows={4} className="w-full p-2 sm:p-3 bg-gray-800/60 text-white rounded-md focus:outline-none text-sm sm:text-base"></textarea>
-              </div>
-              <div>
-                <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 transition-colors py-2 sm:py-3 rounded-md font-medium text-sm sm:text-base">
-                  Send Message
-                </button>
-              </div>
-            </form>
+                      <h3 className="text-lg sm:text-xl font-semibold mb-4">Send Us a Message</h3>
+              <form className="space-y-3 sm:space-y-4" onSubmit={handleContactSubmit}>
+                <div>
+                  <input 
+                    type="text" 
+                    name="name"
+                    value={contactFormData.name}
+                    onChange={handleContactInputChange}
+                    placeholder="Your Name" 
+                    className="w-full p-2 sm:p-3 bg-gray-800/60 text-white rounded-md focus:outline-none text-sm sm:text-base"
+                    required
+                  />
+                </div>
+                <div>
+                  <input 
+                    type="email" 
+                    name="email"
+                    value={contactFormData.email}
+                    onChange={handleContactInputChange}
+                    placeholder="Your Email" 
+                    className="w-full p-2 sm:p-3 bg-gray-800/60 text-white rounded-md focus:outline-none text-sm sm:text-base"
+                    required
+                  />
+                </div>
+                <div>
+                  <textarea 
+                    placeholder="Your Message" 
+                    name="message"
+                    value={contactFormData.message}
+                    onChange={handleContactInputChange}
+                    rows={4} 
+                    className="w-full p-2 sm:p-3 bg-gray-800/60 text-white rounded-md focus:outline-none text-sm sm:text-base"
+                    required
+                  ></textarea>
+                </div>
+                <div>
+                  <button 
+                    type="submit" 
+                    className="w-full bg-blue-600 hover:bg-blue-700 transition-colors py-2 sm:py-3 rounded-md font-medium text-sm sm:text-base"
+                  >
+                    Send Message
+                  </button>
+                </div>
+              </form>
           </div>
         </div>
       </div>
@@ -702,6 +911,13 @@ export default function Home() {
       <footer className="text-center text-gray-400 py-6 border-t border-blue-900/50">
         <p>© {new Date().getFullYear()} TechPoa Connect. All rights reserved.</p>
       </footer>
+
+      <SuccessModal 
+        isOpen={showSuccessModal}
+        onClose={() => setShowSuccessModal(false)}
+        title={successModalContent.title}
+        message={successModalContent.message}
+      />
     </main>
   );
 }
