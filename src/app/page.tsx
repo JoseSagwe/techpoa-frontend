@@ -81,6 +81,7 @@ const handleContactSubmit = async (e: React.FormEvent) => {
       alert(`Failed to send message: ${response.message}`);
     }
   } catch (error) {
+    console.error('Error:', error);
     alert('An error occurred. Please try again later.');
   }
 };
@@ -160,6 +161,7 @@ const handleContactSubmit = async (e: React.FormEvent) => {
         setSubmitStatus({ type: 'error', message: response.message || 'Failed to subscribe. Please try again later.' });
       }
     } catch (error) {
+      console.error('Error:', error);
       setSubmitStatus({ type: 'error', message: 'An error occurred. Please try again later.' });
     }
     
@@ -212,6 +214,7 @@ const handleContactSubmit = async (e: React.FormEvent) => {
         alert(`Failed to submit quote request: ${response.message}`);
       }
     } catch (error) {
+      console.error('Error:', error);
       alert('An error occurred. Please try again later.');
     }
   };

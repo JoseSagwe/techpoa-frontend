@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import { Users, FileText, MessageSquare, LogOut, BarChart2, Mail, RefreshCw, Search, X, Copy, Calendar, Clock } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { FileText, MessageSquare, LogOut, BarChart2, Mail, RefreshCw, Search, X, Copy, Calendar, Clock } from 'lucide-react';
 import { 
   getDashboardStats, 
   getSubscribers, 
@@ -30,7 +30,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ accessCode, onLogout })
   const [error, setError] = useState<string | null>(null);
   const [expandedQuoteId, setExpandedQuoteId] = useState<number | null>(null);
 
-  const fetchDashboardData = async () => {
+  const fetchDashboardData = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     
@@ -61,11 +61,12 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ accessCode, onLogout })
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [activeTab, accessCode]);
+
 
   useEffect(() => {
-    fetchDashboardData();
-  }, [activeTab, accessCode]);
+  fetchDashboardData();
+}, [fetchDashboardData]);
 
   const filteredSubscribers = subscribers.filter(sub => 
     sub.email?.toLowerCase().includes(searchTerm.toLowerCase())
