@@ -902,12 +902,6 @@ const handleContactSubmit = async (e: React.FormEvent) => {
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="text-center text-gray-400 py-6 border-t border-blue-900/50">
-        <p>© {new Date().getFullYear()} TechPoa Connect. All rights reserved.</p>
-      </footer>
-
       <SuccessModal 
         isOpen={showSuccessModal}
         onClose={() => setShowSuccessModal(false)}
