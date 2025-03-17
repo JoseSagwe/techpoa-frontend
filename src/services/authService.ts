@@ -1,8 +1,5 @@
 // src/services/authService.ts
 
-// Base API URL - in a real app, this would be your backend API
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.techpoa.com/api';
-
 // Types
 export interface LoginRequest {
   email: string;
@@ -117,7 +114,7 @@ const authService = {
   },
 
   // Forgot password
-  forgotPassword: async (data: ForgotPasswordRequest): Promise<{ success: boolean; message: string }> => {
+  forgotPassword: async (forgotPasswordData: ForgotPasswordRequest): Promise<{ success: boolean; message: string }> => {
     try {
       // Simulate API response delay
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -134,13 +131,13 @@ const authService = {
   },
 
   // Reset password
-  resetPassword: async (data: ResetPasswordRequest): Promise<{ success: boolean; message: string }> => {
+  resetPassword: async (resetData: ResetPasswordRequest): Promise<{ success: boolean; message: string }> => {
     try {
       // Simulate API response delay
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       // Simulate invalid token
-      if (data.token === 'invalid-token') {
+      if (resetData.token === 'invalid-token') {
         throw new Error('Invalid or expired token');
       }
 
@@ -156,13 +153,13 @@ const authService = {
   },
 
   // Verify email
-  verifyEmail: async (data: VerifyEmailRequest): Promise<{ success: boolean; message: string }> => {
+  verifyEmail: async (verifyData: VerifyEmailRequest): Promise<{ success: boolean; message: string }> => {
     try {
       // Simulate API response delay
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       // Simulate invalid token
-      if (data.token === 'invalid-token') {
+      if (verifyData.token === 'invalid-token') {
         throw new Error('Invalid or expired token');
       }
 
@@ -178,15 +175,15 @@ const authService = {
   },
 
   // Resend verification email
-  resendVerificationEmail: async (email: string): Promise<{ success: boolean; message: string }> => {
+  resendVerificationEmail: async (userEmail: string): Promise<{ success: boolean; message: string }> => {
     try {
       // Simulate API response delay
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Always succeed for demo
+      // Use the email parameter in the response message
       return {
         success: true,
-        message: 'Verification email sent successfully',
+        message: `Verification email sent successfully to ${userEmail}`,
       };
     } catch (error) {
       console.error('Resend verification email error:', error);
@@ -199,6 +196,9 @@ const authService = {
     // Clear token and user data from storage
     localStorage.removeItem('authToken');
     localStorage.removeItem('userData');
+    // Also clear from sessionStorage if used
+    sessionStorage.removeItem('authToken');
+    sessionStorage.removeItem('userData');
   },
 };
 

@@ -1,6 +1,7 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -14,7 +15,6 @@ import {
   Code, 
   Users, 
   Briefcase,
-  Globe,
   AlertCircle,
   CheckCircle2,
   X,
@@ -399,8 +399,6 @@ export default function SignUp() {
     );
   };
 
-  // Check if we're on first step to show Google sign up
-  const isFirstStep = currentStep === "personal";
 
   // Render content based on current step
   const renderStepContent = () => {
@@ -415,11 +413,13 @@ export default function SignUp() {
                 onClick={handleGoogleSignUp}
                 className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-md shadow-sm bg-white hover:bg-gray-50 text-sm font-medium text-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 group"
               >
-                <img 
-                  src="/google.svg" 
-                  alt="Google logo" 
-                  className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" 
-                />
+               <Image 
+                src="/google.svg" 
+                alt="Google logo" 
+                width={20}
+                height={20}
+                className="mr-2" 
+              />
                 Sign up with Google
               </button>
               
@@ -762,7 +762,7 @@ export default function SignUp() {
                   Almost there!
                 </h4>
                 <p className="text-sm text-gray-400 mt-1">
-                  In the next step, we'll send a verification code to your email to confirm your account.
+                  In the next step, we&apos;ll send a verification code to your email to confirm your account.
                 </p>
               </div>
             </div>
@@ -782,7 +782,7 @@ export default function SignUp() {
             </h3>
             
             <p className="text-gray-400">
-              We've sent a 6-digit verification code to
+              We&apos;ve sent a 6-digit verification code to
               <strong className="block mt-1 text-white">{formData.email}</strong>
             </p>
             
@@ -815,7 +815,7 @@ export default function SignUp() {
                   )}
                   
                   <p className="text-sm text-gray-400 mt-4">
-                    Didn't receive the code? 
+                    Didn&apos;t receive the code? 
                     <button 
                       type="button"
                       className="ml-1 text-blue-400 hover:text-blue-300 focus:outline-none transition-colors"
@@ -835,10 +835,10 @@ export default function SignUp() {
             <div className="bg-blue-900/20 border border-blue-800 rounded-lg p-4 text-left">
               <h4 className="font-medium text-blue-300 flex items-center">
                 <CheckCircle className="h-5 w-5 mr-2" />
-                What's Next?
+                What&apos;s Next?
               </h4>
               <p className="text-sm text-gray-400 mt-1">
-                After verifying your email, you'll be able to access all TechPoa Connect features, including courses, community forums, and development projects.
+                After verifying your email, you&apos;ll be able to access all TechPoa Connect features, including courses, community forums, and development projects.
               </p>
             </div>
           </div>

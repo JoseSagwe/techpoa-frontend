@@ -11,13 +11,22 @@ type User = {
   avatar?: string;
 };
 
+// Define signup data type
+type SignupData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  role?: 'student' | 'instructor' | 'developer' | 'client';
+};
+
 // Define auth context type
 type AuthContextType = {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, password: string, rememberMe?: boolean) => Promise<void>;
-  signup: (userData: any) => Promise<void>;
+  signup: (userData: SignupData) => Promise<void>;
   logout: () => void;
   updateUser: (userData: Partial<User>) => Promise<void>;
 };
@@ -103,8 +112,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       };
       
       // Save auth data
-      localStorage.setItem('authToken', fakeToken);
-      localStorage.setItem('userData', JSON.stringify(mockUser));
+      if (rememberMe) {
+        localStorage.setItem('authToken', fakeToken);
+        localStorage.setItem('userData', JSON.stringify(mockUser));
+      } else {
+        sessionStorage.setItem('authToken', fakeToken);
+        sessionStorage.setItem('userData', JSON.stringify(mockUser));
+      }
       
       // Update state
       setUser(mockUser);
@@ -117,7 +131,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   // Signup function
-  const signup = async (userData: any) => {
+  const signup = async (userData: SignupData) => {
     setIsLoading(true);
     
     try {
@@ -158,6 +172,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // Clear auth data
     localStorage.removeItem('authToken');
     localStorage.removeItem('userData');
+    sessionStorage.removeItem('authToken');
+    sessionStorage.removeItem('userData');
     
     // Update state
     setUser(null);

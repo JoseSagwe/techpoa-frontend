@@ -96,7 +96,7 @@ export default function VerifyEmail() {
             
             <div className="space-y-4">
               <div className="bg-blue-900/30 border border-blue-800 rounded-lg p-4">
-                <h4 className="font-medium text-blue-300 mb-2">What's next?</h4>
+                <h4 className="font-medium text-blue-300 mb-2">What&apos;s next?</h4>
                 <p className="text-sm text-gray-300 mb-2">
                   Now that your account is fully activated, you can:
                 </p>
@@ -131,7 +131,7 @@ export default function VerifyEmail() {
             </h3>
             
             <p className="text-gray-300 mb-6">
-              We couldn't verify your email address. The verification link may be invalid or expired.
+              We couldn&apos;t verify your email address. The verification link may be invalid or expired.
             </p>
             
             <div className="bg-gray-800/80 rounded-lg p-5 mb-6">

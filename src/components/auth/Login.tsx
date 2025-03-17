@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Mail, Lock, EyeOff, Eye, AlertCircle } from "lucide-react";
+import Image from "next/image";
 
 export default function Login() {
   // State for form data
@@ -190,10 +191,12 @@ export default function Login() {
               onClick={handleGoogleSignIn}
               className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-md shadow-sm bg-white hover:bg-gray-50 text-sm font-medium text-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
-              <img 
+              <Image 
                 src="/google.svg" 
                 alt="Google logo" 
-                className="h-5 w-5 mr-2" 
+                width={20}
+                height={20}
+                className="mr-2" 
               />
               Sign in with Google
             </button>
