@@ -86,13 +86,13 @@ export default function TermsOfService() {
               <FileText className="h-5 w-5" />,
               <>
                 <p>
-                  These Terms of Service ("Terms") are a legal agreement between you and TechPoa Connect ("we," "us," or "our") that govern your use of the TechPoa Connect platform, including our website at techpoa.com, mobile applications, APIs, and all related services, features, content, and products (collectively, the "Services").
+                  These Terms of Service (&quot;Terms&quot;) are a legal agreement between you and TechPoa Connect (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) that govern your use of the TechPoa Connect platform, including our website at techpoa.com, mobile applications, APIs, and all related services, features, content, and products (collectively, the &quot;Services&quot;).
                 </p>
                 <p className="mt-3">
                   By accessing or using our Services, you acknowledge that you have read, understood, and agree to be bound by these Terms. If you do not agree to these Terms, you must not access or use our Services.
                 </p>
                 <p className="mt-3">
-                  We may modify these Terms at any time at our sole discretion. If we do so, we will notify you by posting the updated Terms on our website and changing the "Last Updated" date above. Your continued use of the Services after any such change constitutes your acceptance of the new Terms.
+                  We may modify these Terms at any time at our sole discretion. If we do so, we will notify you by posting the updated Terms on our website and changing the &quot;Last Updated&quot; date above. Your continued use of the Services after any such change constitutes your acceptance of the new Terms.
                 </p>
               </>
             )}
@@ -112,7 +112,7 @@ export default function TermsOfService() {
                   <strong>2.3 Account Security:</strong> You are responsible for maintaining the security of your account and password. You agree to notify us immediately of any unauthorized access to or use of your account. We cannot and will not be liable for any loss or damage arising from your failure to comply with this security obligation.
                 </p>
                 <p className="mt-3">
-                  <strong>2.4 Age Restrictions:</strong> You must be at least 16 years old to create an account. If you are under 18, you represent that you have your parent or guardian's permission to use the Services and that they have read and agree to these Terms on your behalf.
+                  <strong>2.4 Age Restrictions:</strong> You must be at least 16 years old to create an account. If you are under 18, you represent that you have your parent or guardian&apos;s permission to use the Services and that they have read and agree to these Terms on your behalf.
                 </p>
                 <p className="mt-3">
                   <strong>2.5 Account Termination:</strong> We reserve the right to suspend or terminate your account and access to the Services at our discretion, without notice, for conduct that we determine violates these Terms or is harmful to other users, us, or third parties, or for any other reason.
@@ -134,7 +134,7 @@ export default function TermsOfService() {
                 <ul className="list-disc pl-6 space-y-1 mt-2">
                   <li>Use the Services in any way that violates any applicable law or regulation</li>
                   <li>Impersonate any person or entity, or falsely state or misrepresent your affiliation with a person or entity</li>
-                  <li>Engage in any automated use of the system, such as using scripts or bots to access, "scrape," or download content</li>
+                  <li>Engage in any automated use of the system, such as using scripts or bots to access, &quot;scrape,&quot; or download content</li>
                   <li>Attempt to gain unauthorized access to any portion of the Services</li>
                   <li>Interfere with or disrupt the operation of the Services or servers or networks connected to the Services</li>
                   <li>Post or transmit any content that is unlawful, fraudulent, threatening, abusive, defamatory, obscene, or otherwise objectionable</li>
@@ -252,7 +252,7 @@ export default function TermsOfService() {
               <AlertTriangle className="h-5 w-5" />,
               <>
                 <p>
-                  <strong>8.1 Disclaimer of Warranties:</strong> THE SERVICES ARE PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+                  <strong>8.1 Disclaimer of Warranties:</strong> THE SERVICES ARE PROVIDED ON AN &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; BASIS WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
                 </p>
                 <p className="mt-3">
                   <strong>8.2 Limitation of Liability:</strong> TO THE FULLEST EXTENT PERMITTED BY LAW, IN NO EVENT WILL TECHPOA CONNECT, ITS AFFILIATES, OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, OR SERVICE PROVIDERS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM:
@@ -270,7 +270,7 @@ export default function TermsOfService() {
                   <strong>8.4 Application:</strong> THE LIMITATIONS OF THIS SECTION WILL APPLY TO ANY THEORY OF LIABILITY, WHETHER BASED ON WARRANTY, CONTRACT, STATUTE, TORT (INCLUDING NEGLIGENCE) OR OTHERWISE, AND WHETHER OR NOT WE HAVE BEEN INFORMED OF THE POSSIBILITY OF ANY SUCH DAMAGE.
                 </p>
                 <p className="mt-3">
-                  <strong>8.5 Exclusions:</strong> SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF IMPLIED WARRANTIES OR LIMITATION OF LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES, WHICH MEANS THAT SOME OF THE ABOVE LIMITATIONS MAY NOT APPLY TO YOU. IN THESE JURISDICTIONS, TECHPOA CONNECT'S LIABILITY WILL BE LIMITED TO THE GREATEST EXTENT PERMITTED BY LAW.
+                  <strong>8.5 Exclusions:</strong> SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF IMPLIED WARRANTIES OR LIMITATION OF LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES, WHICH MEANS THAT SOME OF THE ABOVE LIMITATIONS MAY NOT APPLY TO YOU. IN THESE JURISDICTIONS, TECHPOA CONNECT&apos;S LIABILITY WILL BE LIMITED TO THE GREATEST EXTENT PERMITTED BY LAW.
                 </p>
               </>
             )}

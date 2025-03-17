@@ -180,7 +180,7 @@ export default function PrivacyPolicy() {
                   </p>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>Sending transactional emails (e.g., registration confirmation, course updates)</li>
-                    <li>Sending marketing communications (if you've opted in)</li>
+                    <li>Sending marketing communications (if you&apos;ve opted in)</li>
                     <li>Providing updates about new features, courses, or services</li>
                     <li>Conducting surveys and collecting feedback</li>
                   </ul>
@@ -408,7 +408,7 @@ export default function PrivacyPolicy() {
                   <li>Displaying a notification when you log into our services</li>
                 </ul>
                 <p className="mt-3">
-                  We encourage you to review our Privacy Policy periodically. The "Last Updated" date at the top of this policy indicates when it was last revised. Your continued use of our services after any changes to this Privacy Policy constitutes your acceptance of the changes.
+                  We encourage you to review our Privacy Policy periodically. The &quot;Last Updated&quot; date at the top of this policy indicates when it was last revised. Your continued use of our services after any changes to this Privacy Policy constitutes your acceptance of the changes.
                 </p>
               </>
             )}

@@ -41,6 +41,18 @@ type Message = {
   options?: string[];
 };
 
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
+interface FAQCategory {
+  id: string;
+  icon: React.ReactNode;
+  title: string;
+  faqs: FAQ[];
+}
+
 // AI responses for common questions
 const aiResponses: Record<string, string> = {
   "hello": "Hello! How can I help you today with TechPoa Connect?",
@@ -322,7 +334,7 @@ const quickStartOptions = [
 export default function Support() {
   const [activeCategory, setActiveCategory] = useState("account");
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredFaqs, setFilteredFaqs] = useState<any[]>([]);
+  const [filteredFaqs, setFilteredFaqs] = useState<FAQCategory[]>([]);
   const [isVisible, setIsVisible] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
@@ -591,7 +603,7 @@ export default function Support() {
       if (filteredFaqs.length === 0 && suggestedArticles.length === 0) {
         return (
           <div className="bg-blue-900/20 border border-blue-800/30 rounded-lg p-6 text-center">
-            <p className="text-lg text-gray-300">No results found for "{searchTerm}"</p>
+            <p className="text-center py-8">No results found for &quot;{searchTerm}&quot;</p>
             <p className="mt-2 text-sm text-gray-400">
               Try different keywords or <Link href="#support-ticket" onClick={(e) => {
                 e.preventDefault();
@@ -633,7 +645,7 @@ export default function Support() {
           
           {filteredFaqs.length > 0 && (
             <div className="space-y-6">
-              <h2 className="text-xl font-semibold mb-4">FAQ Results for "{searchTerm}"</h2>
+              <h2 className="text-xl font-semibold mb-4">FAQ Results for &quot;{searchTerm}&quot;</h2>
               {filteredFaqs.map((category) => (
                 <div key={category.id} className="space-y-4">
                   <div className="flex items-center space-x-2">
@@ -641,12 +653,12 @@ export default function Support() {
                     <h3 className="text-lg font-medium">{category.title}</h3>
                   </div>
                   <div className="space-y-4 pl-7">
-                    {category.faqs.map((faq: any, index: number) => (
-                      <div key={index} className="bg-blue-900/20 border border-blue-800/30 rounded-lg p-4">
-                        <h4 className="font-medium text-blue-300">{faq.question}</h4>
-                        <p className="mt-2 text-gray-300 text-sm">{faq.answer}</p>
-                      </div>
-                    ))}
+                  {category.faqs.map((faq: FAQ, index: number) => (
+                  <div key={index} className="bg-blue-900/20 border border-blue-800/30 rounded-lg p-4">
+                    <h4 className="font-medium text-blue-300">{faq.question}</h4>
+                    <p className="mt-2 text-gray-300 text-sm">{faq.answer}</p>
+                  </div>
+                ))}
                   </div>
                 </div>
               ))}
@@ -1386,9 +1398,11 @@ export default function Support() {
               )}
               
               <div className="mt-2 text-center">
-                <p className="text-xs text-gray-500">
-                  Powered by <span className="text-blue-400 flex items-center justify-center"><Sparkles className="h-3 w-3 mr-1" />TechPoa AI</span>
-                </p>
+              <p className="text-xs text-gray-500">
+                Powered by <span className="text-blue-400 flex items-center justify-center">
+                  <Sparkles className="h-3 w-3 mr-1" />TechPoa AI
+                </span>
+              </p>
               </div>
             </form>
           </div>

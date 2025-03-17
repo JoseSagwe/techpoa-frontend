@@ -18,7 +18,6 @@ import {
   ChevronRight,
   Sparkles,
   Calendar,
-  ExternalLink,
   ArrowRight,
   Briefcase
 } from "lucide-react";
@@ -46,27 +45,13 @@ export default function Contact() {
     phone: '',
     category: 'general'
   });
+
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>("general");
   const { showToast } = useToast();
 
-  // Sample office hours and locations
-  const officeHours = [
-    { day: "Monday - Friday", hours: "9:00 AM - 5:00 PM EAT" },
-    { day: "Saturday", hours: "10:00 AM - 2:00 PM EAT" },
-    { day: "Sunday", hours: "Closed" }
-  ];
-
-  const locations = [
-    {
-      name: "Nairobi HQ",
-      address: "TechPoa Innovation Center, Ngong Road, Nairobi, Kenya",
-      phone: "+254 716 687 177",
-      email: "nairobi@techpoa.com"
-    }
-  ];
 
   const contactCategories = [
     { id: "general", label: "General Inquiry", icon: <MessageSquare size={20} className="text-blue-400" /> },
@@ -86,7 +71,7 @@ export default function Contact() {
       setActiveCategory(category);
       setFormData(prev => ({ ...prev, category }));
     }
-  }, []);
+  }, [contactCategories]); // Add contactCategories to dependency array
 
   const validateForm = () => {
     const errors: Record<string, string> = {};
@@ -168,23 +153,23 @@ export default function Contact() {
     setFormSubmitted(false);
   };
 
-  // Function to get subtitle based on active category
   const getCategorySubtitle = () => {
     switch(activeCategory) {
       case "general":
-        return "Have a question or comment? We'd love to hear from you.";
+        return "Have a question or comment? We&apos;d love to hear from you.";
       case "support":
         return "Need technical assistance? Our support team is here to help.";
       case "sales":
-        return "Interested in our services? Let's discuss how we can help your business.";
+        return "Interested in our services? Let&apos;s discuss how we can help your business.";
       case "partnerships":
         return "Looking to collaborate? Tell us about partnership opportunities.";
       case "careers":
         return "Interested in joining our team? Tell us about yourself.";
       default:
-        return "We're here to help. Send us a message and we'll get back to you soon.";
+        return "We&apos;re here to help. Send us a message and we&apos;ll get back to you soon.";
     }
   };
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-blue-900 text-white">

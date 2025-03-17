@@ -88,6 +88,67 @@ export default function AboutUs() {
   const [isVisible, setIsVisible] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [expandedTeamMember, setExpandedTeamMember] = useState<number | null>(null);
+
+  // Testimonials data
+  const testimonials: TestimonialType[] = [
+    {
+      id: 1,
+      name: "John Kamau",
+      role: "Frontend Developer",
+      company: "Wasoko",
+      image: "/testimonials/john.jpg",
+      quote: "The courses at TechPoa transformed my career. I went from a basic understanding of HTML to building complex web applications. Now I work at one of Africa's fastest-growing tech companies.",
+      rating: 5
+    },
+    {
+      id: 2,
+      name: "Esther Wanjiku",
+      role: "CTO",
+      company: "FinEdge",
+      image: "/testimonials/john.jpg",
+      quote: "We partnered with TechPoa for our digital transformation project. Their consultancy team provided incredible insights and delivered a custom solution that increased our operational efficiency by 40%.",
+      rating: 5
+    },
+    {
+      id: 3,
+      name: "Michael Otieno",
+      role: "Product Manager",
+      company: "SkyGarden",
+      image: "/testimonials/john.jpg",
+      quote: "TechPoa's development team built our e-commerce platform from scratch. Their attention to detail and technical expertise were impressive. The platform now handles thousands of daily transactions flawlessly.",
+      rating: 4
+    }
+  ];
+
+  // Animate stats with counting effect
+  const animateStats = () => {
+    const duration = 2000; // 2 seconds animation
+    const frameDuration = 1000 / 60; // 60fps
+    const totalFrames = Math.round(duration / frameDuration);
+    
+    let frame = 0;
+    const countUp = () => {
+      frame++;
+      const progress = frame / totalFrames;
+      const easeOutQuad = (t: number) => t * (2 - t); // Easing function
+      const easedProgress = easeOutQuad(progress);
+      
+      const newStats: {[key: string]: string} = {};
+      stats.forEach(stat => {
+        const numericValue = parseInt(stat.value.replace(/,/g, ''));
+        const currentValue = Math.floor(easedProgress * numericValue);
+        newStats[stat.label] = currentValue.toLocaleString();
+      });
+      
+      setAnimatedStats(newStats);
+      
+      if (frame < totalFrames) {
+        requestAnimationFrame(countUp);
+      }
+    };
+    
+    requestAnimationFrame(countUp);
+  };
   
   // Refs for scroll animations
   const sectionsRef = useRef<{[key: string]: HTMLDivElement | null}>({});
@@ -124,50 +185,22 @@ export default function AboutUs() {
     const observer = new IntersectionObserver(observerCallback, observerOptions);
     
     // Observe all sections
-    Object.values(sectionsRef.current).forEach(section => {
-      if (section) observer.observe(section);
-    });
-    
-    // Setup testimonial rotation
-    const testimonialInterval = setInterval(() => {
-      setActiveTestimonial(prev => (prev + 1) % testimonials.length);
-    }, 10000);
-    
-    return () => {
-      observer.disconnect();
-      clearInterval(testimonialInterval);
-    };
-  }, []);
+  Object.values(sectionsRef.current).forEach(section => {
+    if (section) observer.observe(section);
+  });
   
-  // Animate stats with counting effect
-  const animateStats = () => {
-    const duration = 2000; // 2 seconds animation
-    const frameDuration = 1000 / 60; // 60fps
-    const totalFrames = Math.round(duration / frameDuration);
-    
-    let frame = 0;
-    const countUp = () => {
-      frame++;
-      const progress = frame / totalFrames;
-      const easeOutQuad = (t: number) => t * (2 - t); // Easing function
-      const easedProgress = easeOutQuad(progress);
-      
-      const newStats: {[key: string]: string} = {};
-      stats.forEach(stat => {
-        const numericValue = parseInt(stat.value.replace(/,/g, ''));
-        const currentValue = Math.floor(easedProgress * numericValue);
-        newStats[stat.label] = currentValue.toLocaleString();
-      });
-      
-      setAnimatedStats(newStats);
-      
-      if (frame < totalFrames) {
-        requestAnimationFrame(countUp);
-      }
-    };
-    
-    requestAnimationFrame(countUp);
+  // Setup testimonial rotation
+  const testimonialInterval = setInterval(() => {
+    setActiveTestimonial(prev => (prev + 1) % testimonials.length);
+  }, 10000);
+  
+  return () => {
+    observer.disconnect();
+    clearInterval(testimonialInterval);
   };
+}, [animateStats, testimonials.length]); // Added missing dependencies
+  
+  
 
   // Core values data
   const values: ValuesType[] = [
@@ -361,37 +394,6 @@ export default function AboutUs() {
     { id: 4, name: "Google", logo: "/partners/google.png", url: "https://google.com" },
     { id: 5, name: "AWS", logo: "/partners/aws.png", url: "https://aws.amazon.com" },
     { id: 6, name: "Andela", logo: "/partners/andela.png", url: "https://andela.com" },
-  ];
-
-  // Testimonials data
-  const testimonials: TestimonialType[] = [
-    {
-      id: 1,
-      name: "John Kamau",
-      role: "Frontend Developer",
-      company: "Wasoko",
-      image: "/testimonials/john.jpg",
-      quote: "The courses at TechPoa transformed my career. I went from a basic understanding of HTML to building complex web applications. Now I work at one of Africa's fastest-growing tech companies.",
-      rating: 5
-    },
-    {
-      id: 2,
-      name: "Esther Wanjiku",
-      role: "CTO",
-      company: "FinEdge",
-      image: "/testimonials/john.jpg",
-      quote: "We partnered with TechPoa for our digital transformation project. Their consultancy team provided incredible insights and delivered a custom solution that increased our operational efficiency by 40%.",
-      rating: 5
-    },
-    {
-      id: 3,
-      name: "Michael Otieno",
-      role: "Product Manager",
-      company: "SkyGarden",
-      image: "/testimonials/john.jpg",
-      quote: "TechPoa's development team built our e-commerce platform from scratch. Their attention to detail and technical expertise were impressive. The platform now handles thousands of daily transactions flawlessly.",
-      rating: 4
-    }
   ];
 
   // Handle team member expansion
@@ -597,7 +599,7 @@ export default function AboutUs() {
                       Starting with a small cohort of 50 web development students, TechPoa quickly expanded to address multiple needs in the tech ecosystem: quality education, professional development services, and community building.
                     </p>
                     <p className="text-gray-300 text-lg leading-relaxed">
-                      Today, we've grown into a comprehensive platform serving thousands across East Africa, continuing our mission to democratize tech education and services while fostering a vibrant community of tech enthusiasts and professionals.
+                      Today, we&apos;ve grown into a comprehensive platform serving thousands across East Africa, continuing our mission to democratize tech education and services while fostering a vibrant community of tech enthusiasts and professionals.
                     </p>
                   </div>
                 )}
@@ -742,7 +744,7 @@ export default function AboutUs() {
                 <Users className="h-6 w-6 text-blue-400" />
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">Meet Our Team</h2>
-              <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+              <p className="text-gray-300 mb-3">
                 The passionate professionals behind TechPoa Connect who are dedicated to our mission.
               </p>
             </div>
@@ -862,7 +864,7 @@ export default function AboutUs() {
                             ))}
                           </div>
                           
-                          <blockquote className="text-xl italic text-gray-300 mb-6">"{testimonial.quote}"</blockquote>
+                          <blockquote className="text-xl italic text-gray-300 mb-6">&quot;{testimonial.quote}&quot;</blockquote>
                           
                           <div className="flex items-center">
                             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-800 to-purple-800 flex items-center justify-center mr-4">

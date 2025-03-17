@@ -44,77 +44,8 @@ export default function FAQ() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredFaqs, setFilteredFaqs] = useState<FAQItem[]>([]);
   const [expandedAnswers, setExpandedAnswers] = useState<{[key: string]: boolean}>({});
-  
-  // Reference for scroll into view functionality
-  const faqRefs = useRef<{[key: number]: HTMLDivElement | null}>({})
 
-  useEffect(() => {
-    setIsVisible(true);
-
-    // Initialize with filtered faqs based on the default category
-    setFilteredFaqs(
-      searchQuery 
-        ? allFaqs.filter(faq => 
-            faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
-          )
-        : allFaqs.filter(faq => faq.categories.includes(activeCategory))
-    );
-  }, []);
-
-  // Toggle FAQ item
-  const toggleFAQ = (index: number) => {
-    setActiveIndex(prevIndex => (prevIndex === index ? null : index));
-  };
-
-  // Handle category change
-  const handleCategoryChange = (category: string) => {
-    setActiveCategory(category);
-    setActiveIndex(0); // Reset active index
-    
-    // Filter FAQs based on category
-    setFilteredFaqs(
-      searchQuery 
-        ? allFaqs.filter(faq => 
-            faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
-          )
-        : allFaqs.filter(faq => faq.categories.includes(category))
-    );
-  };
-
-  // Handle search
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value;
-    setSearchQuery(query);
-    
-    if (query) {
-      const filtered = allFaqs.filter(faq => 
-        faq.question.toLowerCase().includes(query.toLowerCase()) ||
-        faq.answer.toLowerCase().includes(query.toLowerCase())
-      );
-      setFilteredFaqs(filtered);
-      // Reset category when searching
-      setActiveCategory("");
-    } else {
-      // If search is cleared, go back to selected category
-      const category = activeCategory || "popular";
-      setActiveCategory(category);
-      setFilteredFaqs(allFaqs.filter(faq => faq.categories.includes(category)));
-    }
-  };
-
-  // Toggle "Read More" for long answers
-  const toggleExpandAnswer = (index: number) => {
-    setExpandedAnswers(prev => ({
-      ...prev,
-      [index]: !prev[index]
-    }));
-  };
-
-
-
-  // Comprehensive FAQ data with categories
+    // Comprehensive FAQ data with categories
   // All FAQ categories
   const categories: Category[] = [
     { id: "popular", name: "Popular Questions", icon: <Sparkles className="h-4 w-4" /> },
@@ -260,6 +191,74 @@ export default function FAQ() {
       categories: ["courses", "technical"]
     }
   ];
+  
+  // Reference for scroll into view functionality
+  const faqRefs = useRef<{[key: number]: HTMLDivElement | null}>({})
+
+  useEffect(() => {
+    setIsVisible(true);
+
+    // Initialize with filtered faqs based on the default category
+    setFilteredFaqs(
+      searchQuery 
+        ? allFaqs.filter(faq => 
+            faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+        : allFaqs.filter(faq => faq.categories.includes(activeCategory))
+    );
+  }, [activeCategory, allFaqs, searchQuery]);
+
+  // Toggle FAQ item
+  const toggleFAQ = (index: number) => {
+    setActiveIndex(prevIndex => (prevIndex === index ? null : index));
+  };
+
+  // Handle category change
+  const handleCategoryChange = (category: string) => {
+    setActiveCategory(category);
+    setActiveIndex(0); // Reset active index
+    
+    // Filter FAQs based on category
+    setFilteredFaqs(
+      searchQuery 
+        ? allFaqs.filter(faq => 
+            faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+        : allFaqs.filter(faq => faq.categories.includes(category))
+    );
+  };
+
+  // Handle search
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    
+    if (query) {
+      const filtered = allFaqs.filter(faq => 
+        faq.question.toLowerCase().includes(query.toLowerCase()) ||
+        faq.answer.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredFaqs(filtered);
+      // Reset category when searching
+      setActiveCategory("");
+    } else {
+      // If search is cleared, go back to selected category
+      const category = activeCategory || "popular";
+      setActiveCategory(category);
+      setFilteredFaqs(allFaqs.filter(faq => faq.categories.includes(category)));
+    }
+  };
+
+  // Toggle "Read More" for long answers
+  const toggleExpandAnswer = (index: number) => {
+    setExpandedAnswers(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-blue-900 py-16">
@@ -401,9 +400,9 @@ export default function FAQ() {
                   <HelpCircle className="h-8 w-8 text-blue-400" />
                 </div>
                 <h3 className="text-xl font-medium text-white mb-2">No results found</h3>
-                <p className="text-gray-400 max-w-md mx-auto">
-                  We couldn't find any FAQs matching your search. Try different keywords or browse by category.
-                </p>
+                  <p className="text-gray-400 max-w-md mx-auto">
+                    We couldn&apos;t find any FAQs matching your search. Try different keywords or browse by category.
+                  </p>
                 <button 
                   onClick={() => {
                     setSearchQuery("");
@@ -479,7 +478,7 @@ export default function FAQ() {
             <div className="absolute -top-14 -right-14 w-28 h-28 border-2 border-blue-500/20 rounded-full"></div>
             <div className="absolute -bottom-14 -left-14 w-28 h-28 border-2 border-purple-500/20 rounded-full"></div>
             
-            <h2 className="text-2xl font-bold mb-4 text-white">Couldn't find what you were looking for?</h2>
+            <h2 className="text-2xl font-bold mb-4 text-white">Couldn&apos;t find what you were looking for?</h2>
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
               Our team is ready to assist you with any specific questions or concerns you might have.
               Get in touch with us for personalized support.
