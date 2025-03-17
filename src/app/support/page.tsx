@@ -385,7 +385,7 @@ export default function Support() {
       return;
     }
     
-    const results: any[] = [];
+    const results: FAQCategory[] = [];
     
     faqCategories.forEach(category => {
       const matchingFaqs = category.faqs.filter(faq => 
@@ -1185,7 +1185,7 @@ export default function Support() {
                     Need More Help?
                   </h3>
                   <p className="text-sm text-gray-300 mb-4">
-                    If you can't find what you're looking for, our support team is ready to assist you.
+                    If you can&apos;t find what you&apos;re looking for, our support team is ready to assist you.
                   </p>
                   <div className="space-y-3">
                     <button

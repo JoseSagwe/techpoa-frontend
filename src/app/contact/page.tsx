@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { 
   MessageSquare, 
@@ -53,13 +53,14 @@ export default function Contact() {
   const { showToast } = useToast();
 
 
-  const contactCategories = [
+  // Wrap contactCategories in useMemo to prevent it from being recreated on every render
+  const contactCategories = useMemo(() => [
     { id: "general", label: "General Inquiry", icon: <MessageSquare size={20} className="text-blue-400" /> },
     { id: "support", label: "Technical Support", icon: <Globe size={20} className="text-blue-400" /> },
     { id: "sales", label: "Sales", icon: <Sparkles size={20} className="text-blue-400" /> },
     { id: "partnerships", label: "Partnerships", icon: <Linkedin size={20} className="text-blue-400" /> },
     { id: "careers", label: "Careers", icon: <Briefcase size={20} className="text-blue-400" /> }
-  ];
+  ], []); // Empty dependency array means this only runs once
 
   useEffect(() => {
     setIsVisible(true);
@@ -71,7 +72,7 @@ export default function Contact() {
       setActiveCategory(category);
       setFormData(prev => ({ ...prev, category }));
     }
-  }, [contactCategories]); // Add contactCategories to dependency array
+  }, [contactCategories]); // Now contactCategories won't cause unnecessary re-renders
 
   const validateForm = () => {
     const errors: Record<string, string> = {};
@@ -206,7 +207,7 @@ export default function Contact() {
             <div className="absolute top-0 right-0 h-full w-1 bg-gradient-to-b from-purple-500/0 via-purple-500/30 to-purple-500/0"></div>
             
             <p className="text-lg text-gray-300">
-              Have questions? We're here to help. Reach out to our team for assistance with courses, 
+              Have questions? We&apos;re here to help. Reach out to our team for assistance with courses, 
               development services, or general inquiries.
             </p>
           </div>
@@ -398,7 +399,7 @@ export default function Contact() {
                     </div>
                     <h3 className="text-xl font-medium text-green-400 mb-2">Message Sent Successfully!</h3>
                     <p className="text-gray-300 mb-6 max-w-lg mx-auto">
-                      Thank you for reaching out! We've received your message and will get back to you as soon as possible.
+                      Thank you for reaching out! We&apos;ve received your message and will get back to you as soon as possible.
                     </p>
                     <button
                       onClick={resetForm}
@@ -488,7 +489,7 @@ export default function Contact() {
                         value={formData.subject}
                         onChange={handleInputChange}
                         className="w-full p-3 bg-gray-800/60 text-white rounded-md border border-blue-700/50 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all"
-                        placeholder="What's this about?"
+                        placeholder="What&apos;s this about?"
                       />
                     </div>
                     
@@ -554,7 +555,7 @@ export default function Contact() {
                       </button>
                       
                       <p className="text-sm text-gray-400">
-                        We'll respond within <span className="text-blue-300">24 hours</span>
+                        We&apos;ll respond within <span className="text-blue-300">24 hours</span>
                       </p>
                     </div>
                   </form>

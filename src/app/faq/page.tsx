@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
 import {
   ChevronDown,
@@ -45,19 +45,18 @@ export default function FAQ() {
   const [filteredFaqs, setFilteredFaqs] = useState<FAQItem[]>([]);
   const [expandedAnswers, setExpandedAnswers] = useState<{[key: string]: boolean}>({});
 
-    // Comprehensive FAQ data with categories
-  // All FAQ categories
-  const categories: Category[] = [
+    // Wrap categories in useMemo
+  const categories = useMemo<Category[]>(() => [
     { id: "popular", name: "Popular Questions", icon: <Sparkles className="h-4 w-4" /> },
     { id: "courses", name: "Courses & Learning", icon: <BookOpen className="h-4 w-4" /> },
     { id: "services", name: "Development Services", icon: <Code className="h-4 w-4" /> },
     { id: "community", name: "Community", icon: <Users className="h-4 w-4" /> },
     { id: "account", name: "Account & Billing", icon: <LucideDollarSign className="h-4 w-4" /> },
     { id: "technical", name: "Technical Support", icon: <Server className="h-4 w-4" /> }
-  ];
+  ], []);
 
   // Comprehensive FAQ data with categories
-  const allFaqs: FAQItem[] = [
+  const allFaqs = useMemo<FAQItem[]>(() => [
     {
       question: "What services does TechPoa Connect offer?",
       answer: "TechPoa Connect is a comprehensive technology ecosystem offering multiple services under one platform:\n\n• **Online Courses & Certifications** - Self-paced and instructor-led courses in software development, cybersecurity, AI/ML, and more with hands-on projects and industry-recognized certificates.\n\n• **Software Development Services** - Custom web and mobile application development, enterprise solutions, UI/UX design, and API integrations tailored to your specific business needs.\n\n• **Tech Consultancy** - IT strategy planning, cloud solutions, security audits, and business automation guidance from industry experts.\n\n• **Community & Networking** - A vibrant platform for tech enthusiasts to connect, collaborate on projects, participate in forums, and attend virtual events.\n\n• **Tech News & Resources** - Latest updates on technology trends, tutorials, how-to guides, and insights from industry leaders.",
@@ -190,10 +189,10 @@ export default function FAQ() {
       icon: <Database className="h-5 w-5" />,
       categories: ["courses", "technical"]
     }
-  ];
+  ], []);
   
   // Reference for scroll into view functionality
-  const faqRefs = useRef<{[key: number]: HTMLDivElement | null}>({})
+  const faqRefs = useRef<{[key: number]: HTMLDivElement | null}>({});
 
   useEffect(() => {
     setIsVisible(true);

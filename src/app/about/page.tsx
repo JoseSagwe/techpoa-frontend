@@ -88,6 +88,7 @@ export default function AboutUs() {
   const [isVisible, setIsVisible] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [expandedTeamMember, setExpandedTeamMember] = useState<number | null>(null);
+  
 
   // Testimonials data
   const testimonials: TestimonialType[] = [
@@ -119,88 +120,6 @@ export default function AboutUs() {
       rating: 4
     }
   ];
-
-  // Animate stats with counting effect
-  const animateStats = () => {
-    const duration = 2000; // 2 seconds animation
-    const frameDuration = 1000 / 60; // 60fps
-    const totalFrames = Math.round(duration / frameDuration);
-    
-    let frame = 0;
-    const countUp = () => {
-      frame++;
-      const progress = frame / totalFrames;
-      const easeOutQuad = (t: number) => t * (2 - t); // Easing function
-      const easedProgress = easeOutQuad(progress);
-      
-      const newStats: {[key: string]: string} = {};
-      stats.forEach(stat => {
-        const numericValue = parseInt(stat.value.replace(/,/g, ''));
-        const currentValue = Math.floor(easedProgress * numericValue);
-        newStats[stat.label] = currentValue.toLocaleString();
-      });
-      
-      setAnimatedStats(newStats);
-      
-      if (frame < totalFrames) {
-        requestAnimationFrame(countUp);
-      }
-    };
-    
-    requestAnimationFrame(countUp);
-  };
-  
-  // Refs for scroll animations
-  const sectionsRef = useRef<{[key: string]: HTMLDivElement | null}>({});
-  const inViewSections = useRef<{[key: string]: boolean}>({});
-  
-  // Stats counter animation
-  const [animatedStats, setAnimatedStats] = useState<{[key: string]: string}>({});
-  
-  // Handle visibility and animations on mount
-  useEffect(() => {
-    setIsVisible(true);
-    
-    // Setup intersection observer for animations
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.25
-    };
-    
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach(entry => {
-        const id = entry.target.id;
-        if (entry.isIntersecting && !inViewSections.current[id]) {
-          inViewSections.current[id] = true;
-          
-          // Animate stats when stats section comes into view
-          if (id === 'stats-section') {
-            animateStats();
-          }
-        }
-      });
-    };
-    
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    
-    // Observe all sections
-  Object.values(sectionsRef.current).forEach(section => {
-    if (section) observer.observe(section);
-  });
-  
-  // Setup testimonial rotation
-  const testimonialInterval = setInterval(() => {
-    setActiveTestimonial(prev => (prev + 1) % testimonials.length);
-  }, 10000);
-  
-  return () => {
-    observer.disconnect();
-    clearInterval(testimonialInterval);
-  };
-}, [animateStats, testimonials.length]); // Added missing dependencies
-  
-  
 
   // Core values data
   const values: ValuesType[] = [
@@ -396,6 +315,88 @@ export default function AboutUs() {
     { id: 6, name: "Andela", logo: "/partners/andela.png", url: "https://andela.com" },
   ];
 
+  
+  // Refs for scroll animations
+  const sectionsRef = useRef<{[key: string]: HTMLDivElement | null}>({});
+  const inViewSections = useRef<{[key: string]: boolean}>({});
+  
+  // Stats counter animation
+  const [animatedStats, setAnimatedStats] = useState<{[key: string]: string}>({});
+  
+  // Handle visibility and animations on mount
+useEffect(() => {
+  setIsVisible(true);
+
+  // Animate stats with counting effect
+  const animateStats = () => {
+    const duration = 2000; // 2 seconds animation
+    const frameDuration = 1000 / 60; // 60fps
+    const totalFrames = Math.round(duration / frameDuration);
+    
+    let frame = 0;
+    const countUp = () => {
+      frame++;
+      const progress = frame / totalFrames;
+      const easeOutQuad = (t: number) => t * (2 - t); // Easing function
+      const easedProgress = easeOutQuad(progress);
+      
+      const newStats: {[key: string]: string} = {};
+      stats.forEach(stat => {
+        const numericValue = parseInt(stat.value.replace(/,/g, ''));
+        const currentValue = Math.floor(easedProgress * numericValue);
+        newStats[stat.label] = currentValue.toLocaleString();
+      });
+      
+      setAnimatedStats(newStats);
+      
+      if (frame < totalFrames) {
+        requestAnimationFrame(countUp);
+      }
+    };
+    
+    requestAnimationFrame(countUp);
+  };
+    
+  // Setup intersection observer for animations
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.25
+  };
+  
+  const observerCallback = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach(entry => {
+      const id = entry.target.id;
+      if (entry.isIntersecting && !inViewSections.current[id]) {
+        inViewSections.current[id] = true;
+        
+        // Animate stats when stats section comes into view
+        if (id === 'stats-section') {
+          animateStats();
+        }
+      }
+    });
+  };
+    
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+    
+   // Observe all sections
+  Object.values(sectionsRef.current).forEach(section => {
+    if (section) observer.observe(section);
+  });
+  
+  // Setup testimonial rotation
+  const testimonialInterval = setInterval(() => {
+    setActiveTestimonial(prev => (prev + 1) % testimonials.length);
+  }, 10000);
+  
+  return () => {
+    observer.disconnect();
+    clearInterval(testimonialInterval);
+  };
+}, [testimonials.length, stats]); 
+  
+  
   // Handle team member expansion
   const toggleTeamMember = (id: number) => {
     setExpandedTeamMember(expandedTeamMember === id ? null : id);
@@ -434,7 +435,7 @@ export default function AboutUs() {
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Bridging the gap between technology education and practical application in East Africa.
-              We're building the next generation of tech leaders through quality education, community, and innovation.
+              We&apos;re building the next generation of tech leaders through quality education, community, and innovation.
             </p>
             
             <div className="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
@@ -840,7 +841,7 @@ export default function AboutUs() {
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">What People Say About Us</h2>
               <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-                Hear from students, clients, and community members who've experienced our services.
+                Hear from students, clients, and community members who&apos;ve experienced our services.
               </p>
             </div>
             
@@ -1065,7 +1066,7 @@ export default function AboutUs() {
               
               <h2 className="text-2xl sm:text-3xl font-bold mb-4">Ready to Join the TechPoa Community?</h2>
               <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-                Whether you're looking to learn new tech skills, hire developers, or join our team,
+                Whether you&apos;re looking to learn new tech skills, hire developers, or join our team,
                 we have opportunities for you to connect and grow with us.
               </p>
               
