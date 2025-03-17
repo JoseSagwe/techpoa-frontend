@@ -320,11 +320,11 @@ export default function Login() {
           </p>
           <p>
             By signing in, you agree to our 
-            <Link href="/terms" className="mx-1 text-blue-400 hover:text-blue-300 transition-colors">
+            <Link href="/terms-of-service" className="mx-1 text-blue-400 hover:text-blue-300 transition-colors">
               Terms of Service
             </Link>
             and
-            <Link href="/privacy" className="ml-1 text-blue-400 hover:text-blue-300 transition-colors">
+            <Link href="/privacy-policy" className="ml-1 text-blue-400 hover:text-blue-300 transition-colors">
               Privacy Policy
             </Link>
           </p>

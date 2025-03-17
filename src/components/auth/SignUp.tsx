@@ -574,7 +574,7 @@ export default function SignUp() {
                 </div>
                 <div className="ml-3 text-sm">
                   <label htmlFor="agreeToTerms" className="text-gray-300">
-                    I agree to the <Link href="/terms" className="text-blue-400 hover:text-blue-300 transition-colors">Terms of Service</Link> and <Link href="/privacy" className="text-blue-400 hover:text-blue-300 transition-colors">Privacy Policy</Link>
+                    I agree to the <Link href="/terms-of-service" className="text-blue-400 hover:text-blue-300 transition-colors">Terms of Service</Link> and <Link href="/privacy-policy" className="text-blue-400 hover:text-blue-300 transition-colors">Privacy Policy</Link>
                   </label>
                 </div>
               </div>
@@ -970,9 +970,9 @@ export default function SignUp() {
       {/* Footer with additional information */}
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10 text-center text-xs text-gray-400">
         <p className="mb-2">
-          By creating an account, you agree to our <Link href="/terms" className="text-blue-400 hover:text-blue-300 transition-colors">Terms</Link>,
-          <Link href="/privacy" className="mx-1 text-blue-400 hover:text-blue-300 transition-colors">Privacy Policy</Link> and 
-          <Link href="/cookies" className="ml-1 text-blue-400 hover:text-blue-300 transition-colors">Cookie Policy</Link>
+          By creating an account, you agree to our <Link href="/terms-of-service" className="text-blue-400 hover:text-blue-300 transition-colors">Terms</Link>,
+          <Link href="privacy-policy" className="mx-1 text-blue-400 hover:text-blue-300 transition-colors">Privacy Policy</Link> and 
+          <Link href="/cookies-policy" className="ml-1 text-blue-400 hover:text-blue-300 transition-colors">Cookie Policy</Link>
         </p>
         <p>
           Already have an account? <Link href="/login" className="text-blue-400 hover:text-blue-300 transition-colors">Sign in</Link>

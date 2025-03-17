@@ -250,6 +250,14 @@ const Navbar = () => {
               Contact
               <span className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-500/0 via-blue-500 to-blue-500/0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"></span>
             </Link>
+
+            <Link 
+              href="/support"
+              className="px-3 py-2 text-sm font-medium text-white hover:text-blue-400 hover:bg-blue-900/30 rounded-md transition-colors relative group"
+            >
+              Support
+              <span className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-500/0 via-blue-500 to-blue-500/0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"></span>
+            </Link>
           </div>
 
           {/* Authentication Buttons */}
@@ -413,6 +421,14 @@ const Navbar = () => {
             onClick={closeMenu}
           >
             Contact
+          </Link>
+
+          <Link
+            href="/support"
+            className="block px-3 py-2 text-base font-medium text-white hover:bg-blue-800/40 rounded-md"
+            onClick={closeMenu}
+          >
+            Support
           </Link>
           
           <div className="pt-2 flex flex-col space-y-2">
