@@ -67,8 +67,8 @@ const authService = {
         token: 'mock-jwt-token-' + Math.random().toString(36).substring(2),
         user: {
           id: 'user-' + Math.random().toString(36).substring(2),
-          firstName: data.email.split('@')[0].split('.')[0] || 'John',
-          lastName: data.email.split('@')[0].split('.')[1] || 'Doe',
+          firstName: data.email.split('@')[0].split('.')[0] || 'Joseph',
+          lastName: data.email.split('@')[0].split('.')[1] || 'Sagwe',
           email: data.email,
           role: 'student',
           isEmailVerified: true,

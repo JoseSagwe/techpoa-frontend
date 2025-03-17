@@ -70,3 +70,30 @@
   stroke-dashoffset: 100;
   animation: checkmark 1s ease-in-out forwards 0.3s;
 }
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient-x {
+  background-size: 200% auto;
+  animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes typewriter {
+  0% { width: 0; }
+  50% { width: 100%; }
+  90% { opacity: 1; }
+  95% { opacity: 0; }
+  100% { opacity: 1; width: 100%; }
+}
+
+.animate-typewriter {
+  animation: typewriter 3.5s ease-in-out infinite;
+}
+
+.border-3 {
+  border-width: 3px;
+}

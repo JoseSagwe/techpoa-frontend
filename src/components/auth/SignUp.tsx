@@ -450,7 +450,7 @@ export default function SignUp() {
                     className={`w-full p-3 pl-10 bg-gray-800/60 text-white rounded-md border ${
                       errors.firstName ? 'border-red-500' : 'border-blue-700/50 focus:border-blue-500'
                     } focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all`}
-                    placeholder="John"
+                    placeholder="Joseph"
                   />
                   <User className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
                 </div>
@@ -471,7 +471,7 @@ export default function SignUp() {
                     className={`w-full p-3 pl-10 bg-gray-800/60 text-white rounded-md border ${
                       errors.lastName ? 'border-red-500' : 'border-blue-700/50 focus:border-blue-500'
                     } focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all`}
-                    placeholder="Doe"
+                    placeholder="Noel"
                   />
                   <User className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
                 </div>
@@ -493,7 +493,7 @@ export default function SignUp() {
                   className={`w-full p-3 pl-10 bg-gray-800/60 text-white rounded-md border ${
                     errors.email ? 'border-red-500' : 'border-blue-700/50 focus:border-blue-500'
                   } focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all`}
-                  placeholder="john.doe@example.com"
+                  placeholder="joseph@example.com"
                 />
                 <Mail className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
               </div>

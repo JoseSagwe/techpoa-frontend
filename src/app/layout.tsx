@@ -6,6 +6,8 @@ import { ToastProvider } from "@/components/ToastContext";
 import ClientLayout from "@/components/ClientLayout";
 import AuthProvider from "@/contexts/AuthContext";
 import AuthRouteHandler from "@/components/AuthRouteHandler";
+import { LoadingProvider } from "@/contexts/LoadingContext";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,15 +34,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthProvider>
-          <ToastProvider>
-            <AuthRouteHandler>
-              <ClientLayout>
-                {children}
-              </ClientLayout>
-            </AuthRouteHandler>
-          </ToastProvider>
-        </AuthProvider>
+        <LoadingProvider>
+          <LoadingScreen />
+          <AuthProvider>
+            <ToastProvider>
+              <AuthRouteHandler>
+                <ClientLayout>
+                  {children}
+                </ClientLayout>
+              </AuthRouteHandler>
+            </ToastProvider>
+          </AuthProvider>
+        </LoadingProvider>
       </body>
     </html>
   );
