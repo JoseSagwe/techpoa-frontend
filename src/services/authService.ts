@@ -119,10 +119,10 @@ const authService = {
       // Simulate API response delay
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Always succeed for demo
+      // Actually use the email from the request data in the message
       return {
         success: true,
-        message: 'Password reset instructions sent to your email',
+        message: `Password reset instructions sent to ${forgotPasswordData.email}`,
       };
     } catch (error) {
       console.error('Forgot password error:', error);
