@@ -824,7 +824,7 @@ const handleContactSubmit = async (e: React.FormEvent) => {
                     <Twitter size={18} />
                   </a>
                   <a 
-                    href="https://www.linkedin.com/in/techpoa-connect-ba6609355" 
+                    href="www.linkedin.com/in/birisio-joseph-ba6609355" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"

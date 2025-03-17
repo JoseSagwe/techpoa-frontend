@@ -118,7 +118,7 @@ const Footer = () => {
                 <Twitter size={16} />
               </a>
               <a 
-                href="https://www.linkedin.com/in/techpoa-connect-ba6609355" 
+                href="www.linkedin.com/in/birisio-joseph-ba6609355" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="LinkedIn"
