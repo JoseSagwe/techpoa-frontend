@@ -227,7 +227,7 @@ export default function CookiePolicy() {
               Last Updated: March 19, 2025
             </p>
             <p className="mt-4 text-gray-300">
-              This Cookie Policy explains how TechPoa Connect ("we", "us", or "our") uses cookies and similar technologies 
+              This Cookie Policy explains how TechPoa Connect (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) uses cookies and similar technologies 
               to recognize, understand, and facilitate your browsing experience when you visit our website. It explains what 
               these technologies are, why we use them, and your rights to control our use of them.
             </p>
@@ -252,7 +252,7 @@ export default function CookiePolicy() {
                   Cookies are small text files that are stored on your computer or mobile device when you visit a website. They are widely used to make websites work more efficiently and provide information to the website owners. Cookies help provide a better and more personalized experience.
                 </p>
                 <p className="mt-3">
-                  Cookies may be either "persistent" cookies or "session" cookies:
+                  Cookies may be either &quot;persistent&quot; cookies or &quot;session&quot; cookies:
                 </p>
                 <div className="ml-4 mt-2 space-y-2">
                   <div className="flex">
@@ -282,7 +282,7 @@ export default function CookiePolicy() {
               <Settings className="h-5 w-5" />,
               <>
                 <p>
-                  We use cookies for several reasons. Some cookies are necessary for technical reasons for our website to operate, while others are used to enhance your experience. Here's how we use different types of cookies:
+                  We use cookies for several reasons. Some cookies are necessary for technical reasons for our website to operate, while others are used to enhance your experience. Here&apos;s how we use different types of cookies:
                 </p>
                 <div className="mt-4 space-y-6">
                   {cookieTypes.map(type => (
@@ -397,7 +397,7 @@ export default function CookiePolicy() {
                   <div>
                     <h4 className="font-medium text-blue-300">Browser Settings</h4>
                     <p className="mt-1 text-sm">
-                      Most web browsers allow you to control cookies through their settings. Here's how to manage cookies in popular browsers:
+                      Most web browsers allow you to control cookies through their settings. Here&apos;s how to manage cookies in popular browsers:
                     </p>
                     <ul className="list-disc pl-6 space-y-1 mt-2 text-sm">
                       <li><span className="text-blue-300">Chrome:</span> Settings → Privacy and security → Cookies and other site data</li>
@@ -444,7 +444,7 @@ export default function CookiePolicy() {
                   <div>
                     <h4 className="font-medium text-blue-300">Web Beacons</h4>
                     <p className="mt-1 text-sm">
-                      Also known as "clear GIFs" or "pixel tags," these small graphic images are embedded invisibly on web pages and in emails. They help us understand whether content has been viewed and measure the effectiveness of our marketing campaigns.
+                      Also known as &quot;clear GIFs&quot; or &quot;pixel tags,&quot; these small graphic images are embedded invisibly on web pages and in emails. They help us understand whether content has been viewed and measure the effectiveness of our marketing campaigns.
                     </p>
                   </div>
                   
@@ -458,7 +458,7 @@ export default function CookiePolicy() {
                   <div>
                     <h4 className="font-medium text-blue-300">Session Replay</h4>
                     <p className="mt-1 text-sm">
-                      We may use session replay services to record user interactions with our website to identify usability issues and improve site functionality. This information is anonymized and doesn't include personal data.
+                      We may use session replay services to record user interactions with our website to identify usability issues and improve site functionality. This information is anonymized and doesn&apos;t include personal data.
                     </p>
                   </div>
                   
@@ -481,7 +481,7 @@ export default function CookiePolicy() {
               <Info className="h-5 w-5" />,
               <>
                 <p>
-                  We may update this Cookie Policy from time to time to reflect changes in technology, regulation, or our business practices. Any changes will be posted on this page with an updated "Last Updated" date. For significant changes, we may provide additional notice, such as a banner on our website or an email notification.
+                  We may update this Cookie Policy from time to time to reflect changes in technology, regulation, or our business practices. Any changes will be posted on this page with an updated &quot;Last Updated&quot; date. For significant changes, we may provide additional notice, such as a banner on our website or an email notification.
                 </p>
                 <p className="mt-3">
                   We encourage you to review this Cookie Policy periodically to stay informed about how we use cookies and other tracking technologies. Your continued use of our website after any changes to this Cookie Policy constitutes your acceptance of the changes.
@@ -508,7 +508,7 @@ export default function CookiePolicy() {
           
           <div className="mt-10 text-center">
             <p className="text-gray-400 text-sm">
-              By continuing to use our website, you acknowledge that you've read and understood our Cookie Policy.
+              By continuing to use our website, you acknowledge that you&apos;ve read and understood our Cookie Policy.
             </p>
             <div className="mt-6 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
               <Link 
@@ -553,7 +553,7 @@ export default function CookiePolicy() {
             
             <div className="p-5 space-y-4">
               <p className="text-gray-300">
-                We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.
+                We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking &quot;Accept All&quot;, you consent to our use of cookies.
               </p>
               
               <div className="space-y-4 mt-6">
@@ -611,7 +611,7 @@ export default function CookiePolicy() {
                   <div>
                     <h4 className="font-medium text-blue-300">About This Tool</h4>
                     <p className="mt-1 text-sm text-gray-300">
-                      This cookie manager allows you to customize your cookie preferences for our website. Please note that necessary cookies cannot be disabled as they are essential for the website to function properly. You can change your preferences at any time by clicking the "Manage Cookies" button at the bottom of our website.
+                      This cookie manager allows you to customize your cookie preferences for our website. Please note that necessary cookies cannot be disabled as they are essential for the website to function properly. You can change your preferences at any time by clicking the &quot;Manage Cookies&quot; button at the bottom of our website.
                     </p>
                   </div>
                 </div>
@@ -642,7 +642,7 @@ export default function CookiePolicy() {
             </div>
           </div>
         </div>
-      )}
-    </div>
-  );
-}
+        )}
+        </div>
+      );
+    }
