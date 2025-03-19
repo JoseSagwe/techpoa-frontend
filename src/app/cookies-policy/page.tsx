@@ -617,23 +617,23 @@ export default function CookiePolicy() {
                 </div>
               </div>
               
-              <div className="flex justify-between pt-4 mt-6 border-t border-gray-800">
+              <div className="flex flex-col sm:flex-row justify-between gap-3 pt-4 mt-6 border-t border-gray-800">
                 <button
                   onClick={() => setShowCookieManager(false)}
-                  className="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-md transition-colors text-gray-300"
+                  className="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-md transition-colors text-gray-300 order-3 sm:order-1"
                 >
                   Cancel
                 </button>
-                <div className="space-x-3">
+                <div className="flex flex-col sm:flex-row gap-3 sm:space-x-3 order-1 sm:order-2">
                   <button
                     onClick={saveCookiePreferences}
-                    className="px-4 py-2 border border-blue-600 text-blue-400 hover:bg-blue-900/30 rounded-md transition-colors"
+                    className="px-4 py-2 border border-blue-600 text-blue-400 hover:bg-blue-900/30 rounded-md transition-colors w-full"
                   >
                     Save Preferences
                   </button>
                   <button
                     onClick={acceptAllCookies}
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors w-full"
                   >
                     Accept All
                   </button>
