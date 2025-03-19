@@ -297,6 +297,9 @@ const Footer = () => {
             <Link href="/terms-of-service" className="hover:text-blue-300 transition-colors">
               Terms of Service
             </Link>
+            <Link href="/cookies-polic" className="hover:text-blue-300 transition-colors">
+              Cookie Policy
+            </Link>
             <Link href="/faq" className="hover:text-blue-300 transition-colors">
               FAQ
             </Link>
