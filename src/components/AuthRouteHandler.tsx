@@ -7,10 +7,10 @@ import { useLoading } from "@/contexts/LoadingContext";
 // List of routes that require authentication
 const protectedRoutes = [
   '/dashboard',
-  '/profile',
-  '/courses',
-  '/my-courses',
-  '/community'
+  // '/profile',
+  // '/courses',
+  // '/my-courses',
+  // '/community'
 ];
 
 // List of auth routes (don't show if already logged in)

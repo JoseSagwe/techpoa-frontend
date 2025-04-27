@@ -549,95 +549,152 @@ const handleContactSubmit = async (e: React.FormEvent) => {
         </div>
       )}
       
-      {/* Animated Logo Header */}
-      <div className={`flex justify-center pt-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}>
-        <div className="relative">
-          <div className="relative z-10 overflow-hidden">
-            <h1 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 animate-gradient-x">
-              Tech<span className="text-blue-400 relative">
-                Poa
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-typewriter"></span>
-              </span>
-            </h1>
-            <style jsx>{`
-              @keyframes gradient-shift {
-                0% { background-position: 0% 50%; }
-                50% { background-position: 100% 50%; }
-                100% { background-position: 0% 50%; }
-              }
-              .animate-gradient-x {
-                background-size: 200% auto;
-                animation: gradient-shift 3s ease infinite;
-              }
-              @keyframes typewriter {
-                0% { width: 0; }
-                50% { width: 100%; }
-                90% { opacity: 1; }
-                95% { opacity: 0; }
-                100% { opacity: 1; width: 100%; }
-              }
-              .animate-typewriter {
-                animation: typewriter 3.5s ease-in-out infinite;
-              }
-            `}</style>
-          </div>
-          {/* Tech-inspired decorative elements */}
-          <div className="absolute -top-3 -left-6 w-3 h-3 bg-blue-500 rounded-full animate-ping opacity-75"></div>
-          <div className="absolute top-0 -right-5 w-2 h-2 bg-purple-500 rounded-full animate-ping opacity-75" style={{animationDelay: '0.5s'}}></div>
-          <div className="absolute -bottom-3 left-1/3 w-2 h-2 bg-cyan-400 rounded-full animate-ping opacity-75" style={{animationDelay: '1s'}}></div>
+     {/* Hero Section with Animated Logo and Countdown */}
+<div className={`pt-8 pb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}>
+  {/* Content Container */}
+  <div className="max-w-5xl mx-auto px-4 sm:px-6">
+    <div className="text-center mb-10">
+      {/* Animated Logo with Tech Elements */}
+      <div className="relative inline-block mb-8">
+        {/* Logo Container */}
+        <div className="relative z-10 overflow-hidden">
+          <h1 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 animate-gradient-x">
+            Tech<span className="text-blue-400 relative">
+              Poa
+              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 animate-typewriter"></span>
+            </span>
+          </h1>
           
-          {/* Circuit-like decorative lines */}
-          <div className="absolute top-1/2 -left-8 w-6 h-0.5 bg-blue-500/50"></div>
-          <div className="absolute top-1/4 -right-8 w-6 h-0.5 bg-purple-500/50"></div>
-          <div className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-cyan-400 to-purple-600"></div>
+          <style jsx>{`
+            @keyframes gradient-shift {
+              0% { background-position: 0% 50%; }
+              50% { background-position: 100% 50%; }
+              100% { background-position: 0% 50%; }
+            }
+            .animate-gradient-x {
+              background-size: 200% auto;
+              animation: gradient-shift 3s ease infinite;
+            }
+            @keyframes typewriter {
+              0% { width: 0; }
+              50% { width: 100%; }
+              90% { opacity: 1; }
+              95% { opacity: 0; }
+              100% { opacity: 1; width: 100%; }
+            }
+            .animate-typewriter {
+              animation: typewriter 3.5s ease-in-out infinite;
+            }
+            @keyframes float {
+              0% { transform: translateY(0px); }
+              50% { transform: translateY(-10px); }
+              100% { transform: translateY(0px); }
+            }
+            .animate-float {
+              animation: float 6s ease-in-out infinite;
+            }
+            @keyframes pulse-glow {
+              0% { box-shadow: 0 0 5px 0px rgba(59, 130, 246, 0.5); }
+              50% { box-shadow: 0 0 20px 5px rgba(59, 130, 246, 0.7); }
+              100% { box-shadow: 0 0 5px 0px rgba(59, 130, 246, 0.5); }
+            }
+            .pulse-glow {
+              animation: pulse-glow 3s infinite;
+            }
+          `}</style>
         </div>
-      </div>
-
-      {/* Hero Section with Countdown */}
-      <div className={`flex flex-col items-center justify-center mt-12 px-4 sm:px-6 text-center transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <h2 className="text-3xl sm:text-4xl font-bold">Launching Soon!</h2>
-        <p className="text-lg sm:text-xl mt-2 text-blue-300">Your Gateway to Tech Excellence</p>
         
-        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mt-8 w-full max-w-xl mx-auto">
-          {/* Days Counter */}
-          <div className="flex-1 min-w-[70px] sm:min-w-[80px] bg-blue-900/60 backdrop-blur-sm rounded-lg border border-blue-500/30 p-3 sm:p-4">
-            <div className="flex flex-col items-center justify-center text-center">
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold">{timeLeft.days}</span>
-              <span className="text-xs sm:text-sm text-blue-300 mt-1">Days</span>
+        {/* Tech-inspired decorative elements */}
+        <div className="absolute -top-3 -left-6 w-3 h-3 bg-blue-500 rounded-full animate-ping opacity-75"></div>
+        <div className="absolute top-0 -right-5 w-2 h-2 bg-purple-500 rounded-full animate-ping opacity-75" style={{animationDelay: '0.5s'}}></div>
+        <div className="absolute -bottom-3 left-1/3 w-2 h-2 bg-cyan-400 rounded-full animate-ping opacity-75" style={{animationDelay: '1s'}}></div>
+        
+        {/* Circuit-like decorative lines */}
+        <div className="absolute top-1/2 -left-8 w-6 h-0.5 bg-blue-500/50"></div>
+        <div className="absolute top-1/4 -right-8 w-6 h-0.5 bg-purple-500/50"></div>
+        <div className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 via-cyan-400 to-purple-600"></div>
+        
+        {/* Extra decorative elements */}
+        <div className="absolute -top-10 -right-10 w-20 h-20 border border-blue-500/10 rounded-full"></div>
+        <div className="absolute -bottom-8 -left-8 w-16 h-16 border border-purple-500/10 rounded-full"></div>
+      </div>
+      
+      {/* Headline and Subtext */}
+      <div className="mb-8 relative animate-float">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-2">Launching Soon!</h2>
+        <p className="text-lg sm:text-xl text-blue-300 max-w-xl mx-auto">Connect. Learn. Innovate. Transform.</p>
+        
+        {/* Decorative dots */}
+        <div className="absolute top-1/2 -left-4 sm:-left-10 h-0.5 w-3 sm:w-6 bg-gradient-to-r from-blue-500 to-blue-500/0"></div>
+        <div className="absolute top-1/2 -right-4 sm:-right-10 h-0.5 w-3 sm:w-6 bg-gradient-to-r from-blue-500/0 to-blue-500"></div>
+      </div>
+      
+      {/* Compact Countdown Timer */}
+      <div className="max-w-2xl mx-auto mb-10 pulse-glow rounded-2xl p-1">
+        <div className="bg-blue-900/30 backdrop-blur-lg border border-blue-500/30 rounded-xl overflow-hidden">
+          <div className="py-5 px-2 sm:px-6 flex justify-center items-center">
+            <div className="grid grid-cols-4 gap-3 sm:gap-5 w-full max-w-md">
+              {/* Days */}
+              <div className="flex flex-col items-center">
+                <div className="bg-gradient-to-b from-blue-800/80 to-blue-900/80 rounded-lg w-full py-2 sm:py-3 px-1 sm:px-3 backdrop-blur-sm border border-blue-700/50">
+                  <div className="text-2xl sm:text-3xl font-bold">{timeLeft.days}</div>
+                </div>
+                <div className="text-xs text-blue-300 mt-1 uppercase tracking-wider">Days</div>
+              </div>
+              
+              {/* Hours */}
+              <div className="flex flex-col items-center">
+                <div className="bg-gradient-to-b from-blue-800/80 to-blue-900/80 rounded-lg w-full py-2 sm:py-3 px-1 sm:px-3 backdrop-blur-sm border border-blue-700/50">
+                  <div className="text-2xl sm:text-3xl font-bold">{timeLeft.hours}</div>
+                </div>
+                <div className="text-xs text-blue-300 mt-1 uppercase tracking-wider">Hours</div>
+              </div>
+              
+              {/* Minutes */}
+              <div className="flex flex-col items-center">
+                <div className="bg-gradient-to-b from-blue-800/80 to-blue-900/80 rounded-lg w-full py-2 sm:py-3 px-1 sm:px-3 backdrop-blur-sm border border-blue-700/50">
+                  <div className="text-2xl sm:text-3xl font-bold">{timeLeft.minutes}</div>
+                </div>
+                <div className="text-xs text-blue-300 mt-1 uppercase tracking-wider">Min</div>
+              </div>
+              
+              {/* Seconds */}
+              <div className="flex flex-col items-center">
+                <div className="bg-gradient-to-b from-blue-800/80 to-blue-900/80 rounded-lg w-full py-2 sm:py-3 px-1 sm:px-3 backdrop-blur-sm border border-blue-700/50">
+                  <div className="text-2xl sm:text-3xl font-bold">{timeLeft.seconds}</div>
+                </div>
+                <div className="text-xs text-blue-300 mt-1 uppercase tracking-wider">Sec</div>
+              </div>
             </div>
           </div>
           
-          {/* Hours Counter */}
-          <div className="flex-1 min-w-[70px] sm:min-w-[80px] bg-blue-800/60 backdrop-blur-sm rounded-lg border border-blue-500/30 p-3 sm:p-4">
-            <div className="flex flex-col items-center justify-center text-center">
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold">{timeLeft.hours}</span>
-              <span className="text-xs sm:text-sm text-blue-300 mt-1">Hours</span>
-            </div>
-          </div>
-          
-          {/* Minutes Counter */}
-          <div className="flex-1 min-w-[70px] sm:min-w-[80px] bg-blue-700/60 backdrop-blur-sm rounded-lg border border-blue-500/30 p-3 sm:p-4">
-            <div className="flex flex-col items-center justify-center text-center">
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold">{timeLeft.minutes}</span>
-              <span className="text-xs sm:text-sm text-blue-300 mt-1">Minutes</span>
-            </div>
-          </div>
-          
-          {/* Seconds Counter */}
-          <div className="flex-1 min-w-[70px] sm:min-w-[80px] bg-blue-600/60 backdrop-blur-sm rounded-lg border border-blue-500/30 p-3 sm:p-4">
-            <div className="flex flex-col items-center justify-center text-center">
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold">{timeLeft.seconds}</span>
-              <span className="text-xs sm:text-sm text-blue-300 mt-1">Seconds</span>
-            </div>
+          {/* Launch Date */}
+          <div className="py-2 bg-blue-800/30 text-center text-sm text-blue-200 border-t border-blue-700/30">
+            Launch Date: June 5, 2025
           </div>
         </div>
       </div>
-
+      
       {/* Newsletter Signup */}
-      <div className={`max-w-md mx-auto mt-10 sm:mt-12 px-4 sm:px-6 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <div className="bg-white/10 backdrop-blur-md p-4 sm:p-6 rounded-xl border border-blue-500/20">
-          <h3 className="text-lg sm:text-xl font-semibold mb-2">Get Notified at Launch</h3>
-          <p className="text-blue-200 text-xs sm:text-sm mb-4">Be the first to know when we launch and receive exclusive offers.</p>
+      <div className="max-w-md mx-auto">
+        <div className="bg-gradient-to-r from-blue-900/40 to-purple-900/40 backdrop-blur-xl p-5 sm:p-6 rounded-xl border border-blue-500/20 relative overflow-hidden group hover:border-blue-400/30 transition-all duration-300">
+          {/* Decorative elements */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500/0 via-blue-500/30 to-blue-500/0"></div>
+          <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500/0 via-purple-500/30 to-purple-500/0"></div>
+          <div className="absolute -top-14 -right-14 w-28 h-28 border border-blue-500/10 rounded-full group-hover:scale-110 transition-transform duration-500"></div>
+          <div className="absolute -bottom-14 -left-14 w-28 h-28 border border-purple-500/10 rounded-full group-hover:scale-110 transition-transform duration-500"></div>
+          
+          <h3 className="text-xl font-semibold mb-2 flex items-center justify-center">
+            <span className="mr-2">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              </svg>
+            </span>
+            Get Notified at Launch
+          </h3>
+          <p className="text-blue-200 text-sm mb-4 max-w-xs mx-auto">
+            Be the first to know when we launch and receive exclusive early access offers.
+          </p>
           
           {/* Newsletter status message */}
           {submitStatus && (
@@ -646,23 +703,31 @@ const handleContactSubmit = async (e: React.FormEvent) => {
             </div>
           )}
           
-          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-2 sm:gap-0">
+          <form onSubmit={handleNewsletterSubmit} className="relative">
             <input 
               type="email" 
               placeholder="Your email address" 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full sm:flex-grow p-3 bg-gray-800/60 text-white rounded-md sm:rounded-r-none focus:outline-none focus:ring-2 focus:ring-blue-500" 
+              className="w-full p-3 pr-32 bg-gray-800/60 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 border border-blue-700/50" 
+              required
             />
             <button 
               type="submit"
-              className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 transition-colors px-4 py-3 rounded-md sm:rounded-l-none font-medium"
+              className="absolute right-1 top-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 transition-colors px-4 py-2 rounded-md font-medium text-sm"
             >
               Notify Me
             </button>
           </form>
+          
+          <div className="mt-3 text-xs text-center text-gray-400">
+            We respect your privacy. Unsubscribe at any time.
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 
       {/* Content Tabs */}
       <div className={`max-w-6xl mx-auto mt-16 sm:mt-20 px-4 sm:px-6 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
@@ -824,7 +889,7 @@ const handleContactSubmit = async (e: React.FormEvent) => {
                     <Twitter size={18} />
                   </a>
                   <a 
-                    href="www.linkedin.com/in/birisio-joseph-ba6609355" 
+                    href="https://www.linkedin.com/in/joseph-sagwe" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"

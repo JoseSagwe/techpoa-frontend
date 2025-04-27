@@ -214,9 +214,9 @@ export default function AboutUs() {
       name: "Joseph Birisio",
       role: "Founder & CEO",
       bio: "Joseph founded TechPoa Connect with a vision to democratize tech education in East Africa. With over 15 years of experience in software development and education, he previously led engineering teams at major tech companies and taught computer science at university level. Joseph holds a Master's in Computer Science and is passionate about using technology to solve local challenges.",
-      image: "/team/joseph.jpeg",
+      image: "/team/team.jpg",
       socialLinks: {
-        linkedin: "https://www.linkedin.com/in/birisio-joseph-ba6609355",
+        linkedin: "https://www.linkedin.com/in/joseph-sagwe",
         twitter: "https://twitter.com/josephbirisio",
         github: "https://github.com/josephbirisio"
       }
@@ -226,9 +226,9 @@ export default function AboutUs() {
       name: "Sarah Mwangi",
       role: "Chief Learning Officer",
       bio: "Sarah oversees our educational curriculum and learning methodologies. Her background in instructional design and educational technology helps ensure our courses deliver exceptional learning outcomes. Before joining TechPoa, she developed e-learning programs for international organizations and holds a PhD in Educational Technology.",
-      image: "/team/joseph.jpeg",
+      image: "/team/team.jpg",
       socialLinks: {
-        linkedin: "https://www.linkedin.com/",
+        linkedin: "https://www.linkedin.com/in/joseph-sagwe",
         twitter: "https://twitter.com/"
       }
     },
@@ -237,9 +237,9 @@ export default function AboutUs() {
       name: "David Ochieng",
       role: "CTO",
       bio: "David leads our technical strategy and development services. With expertise in cloud architecture, AI, and software engineering, he ensures our technical solutions are innovative and scalable. Previously, he worked at global tech companies and startups, building systems that serve millions of users.",
-      image: "/team/joseph.jpeg",
+      image: "/team/team.jpg",
       socialLinks: {
-        linkedin: "https://www.linkedin.com/",
+        linkedin: "https://www.linkedin.com/in/joseph-sagwe",
         github: "https://github.com/"
       }
     },
@@ -248,7 +248,7 @@ export default function AboutUs() {
       name: "Amina Hassan",
       role: "Head of Community",
       bio: "Amina builds and nurtures our vibrant tech community. Her background in community management and event planning creates meaningful connections between members. She's passionate about diversity in tech and has launched several initiatives to support underrepresented groups in the industry.",
-      image: "/team/joseph.jpeg",
+      image: "/team/team.jpg",
       socialLinks: {
         linkedin: "https://www.linkedin.com/",
         twitter: "https://twitter.com/"
@@ -259,7 +259,7 @@ export default function AboutUs() {
       name: "Samuel Mburu",
       role: "Lead Developer",
       bio: "Samuel oversees our development projects and mentors junior developers. His technical expertise spans full-stack development, mobile applications, and DevOps. He contributes to open-source projects and frequently speaks at tech conferences across East Africa.",
-      image: "/team/joseph.jpeg",
+      image: "/team/team.jpg",
       socialLinks: {
         github: "https://github.com/",
         linkedin: "https://www.linkedin.com/"
@@ -270,7 +270,7 @@ export default function AboutUs() {
       name: "Grace Ndungu",
       role: "Product Manager",
       bio: "Grace translates user needs into product features that delight. Her background in UX research and product development ensures our platform evolves to meet user expectations. She previously worked with fintech startups and holds an MBA with a focus on technology management.",
-      image: "/team/joseph.jpeg",
+      image: "/team/team.jpg",
       socialLinks: {
         linkedin: "https://www.linkedin.com/"
       }
@@ -456,36 +456,45 @@ useEffect(() => {
             </div>
           </div>
           
-          {/* Video Feature */}
-          <div 
-            className="relative w-full h-[500px] rounded-2xl overflow-hidden mb-20 sm:mb-32 shadow-xl shadow-blue-900/20" 
-            ref={(el: HTMLDivElement | null) => { sectionsRef.current['video-section'] = el }} 
-            id="video-section"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-purple-900/60 z-10"></div>
-            
-            {/* This would normally be a video component; using a dummy image for now */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-900 to-purple-900">
-              {/* Placeholder for video/image */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <a 
-                  href="#" 
-                  className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30 transition-transform hover:scale-110 z-20 group"
-                  onClick={(e) => e.preventDefault()}
+            {/* Video Feature */}
+              <div 
+                className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] rounded-2xl overflow-hidden mb-12 sm:mb-20 md:mb-32 shadow-xl shadow-blue-900/20" 
+                ref={(el: HTMLDivElement | null) => { sectionsRef.current['video-section'] = el }} 
+                id="video-section"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-purple-900/60 z-10"></div>
+                
+                {/* Video background that autoplays and loops */}
+                <video 
+                  className="absolute inset-0 w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
                 >
-                  <PlayCircle className="h-10 w-10 text-white group-hover:text-blue-300 transition-colors" />
-                </a>
+                  <source src="/company-video.mp4" type="video/mp4" />
+                  {/* Fallback message if video can't be played */}
+                  Your browser does not support the video tag.
+                </video>
+                
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <a 
+                    href="#" 
+                    className="w-16 h-16 sm:w-20 sm:h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30 transition-transform hover:scale-110 z-20 group"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    <PlayCircle className="h-8 w-8 sm:h-10 sm:w-10 text-white group-hover:text-blue-300 transition-colors" />
+                  </a>
+                </div>
+                
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-10 z-20">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2">Our Journey in Technology</h2>
+                  <p className="text-gray-300 text-base sm:text-lg max-w-2xl">
+                    See how TechPoa Connect has evolved from a small tech training initiative to a comprehensive ecosystem
+                    serving thousands across East Africa.
+                  </p>
+                </div>
               </div>
-            </div>
-            
-            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 z-20">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-2">Our Journey in Technology</h2>
-              <p className="text-gray-300 text-lg max-w-2xl">
-                See how TechPoa Connect has evolved from a small tech training initiative to a comprehensive ecosystem
-                serving thousands across East Africa.
-              </p>
-            </div>
-          </div>
           
           {/* Mission, Vision, Story Tabs */}
           <div 
@@ -606,19 +615,24 @@ useEffect(() => {
                 )}
               </div>
               
-              {/* Illustration/Image */}
-              <div className="relative h-80 sm:h-96 lg:h-full rounded-xl overflow-hidden shadow-xl shadow-blue-900/20">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20">
-                  {/* This will be replaced with an actual image in production */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-blue-500/50 text-2xl">TechPoa Connect Campus Image</div>
-                  </div>
-                </div>
-                
-                {/* Decorative elements */}
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500/0 via-blue-500/50 to-blue-500/0"></div>
-                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500/0 via-purple-500/50 to-purple-500/0"></div>
-              </div>
+                          {/* Illustration/Image */}
+                    <div className="relative h-80 sm:h-96 lg:h-full rounded-xl overflow-hidden shadow-xl shadow-blue-900/20">
+                      {/* Background gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20 z-10"></div>
+                      
+                      {/* Full-width and height image */}
+                      <img 
+                        src="/campus-image.jpg" 
+                        alt="TechPoa Connect Campus" 
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                      
+                      {/* Decorative elements */}
+                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500/0 via-blue-500/50 to-blue-500/0 z-20"></div>
+                      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500/0 via-purple-500/50 to-purple-500/0 z-20"></div>
+                    </div>
+
+
             </div>
           </div>
           
@@ -734,100 +748,106 @@ useEffect(() => {
             </div>
           </div>
           
-          {/* Team Section */}
-          <div 
-            className="mb-20 sm:mb-32" 
-            ref={(el: HTMLDivElement | null) => { sectionsRef.current['team-section'] = el }} 
-            id="team-section"
-          >
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-600/20 mb-4">
-                <Users className="h-6 w-6 text-blue-400" />
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4">Meet Our Team</h2>
-              <p className="text-gray-300 mb-3">
-                The passionate professionals behind TechPoa Connect who are dedicated to our mission.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {teamMembers.map((member) => (
-                <div key={member.id} className="bg-blue-900/20 backdrop-blur-sm rounded-xl overflow-hidden border border-blue-800/50 transition-all hover:border-blue-600/50 group">
-                  <div className="h-60 bg-gradient-to-br from-blue-900 to-purple-900 relative">
-                    {/* This would be replaced with actual team member images */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-4xl font-bold text-blue-500/30">{member.name.charAt(0)}</div>
-                    </div>
-                  </div>
-                  
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold">{member.name}</h3>
-                    <p className="text-blue-400 mb-3">{member.role}</p>
-                    
-                    <p className={`text-gray-300 text-sm mb-4 ${expandedTeamMember === member.id ? '' : 'line-clamp-3'}`}>
-                      {member.bio}
-                    </p>
-                    
-                    {member.bio.length > 150 && (
-                      <button
-                        onClick={() => toggleTeamMember(member.id)}
-                        className="text-blue-400 hover:text-blue-300 text-sm inline-flex items-center mb-4"
-                      >
-                        {expandedTeamMember === member.id ? 'Read Less' : 'Read More'}
-                        <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${expandedTeamMember === member.id ? 'rotate-180' : ''}`} />
-                      </button>
-                    )}
-                    
-                    <div className="flex space-x-3">
-                      {member.socialLinks.linkedin && (
-                        <a 
-                          href={member.socialLinks.linkedin} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
-                          aria-label={`${member.name} LinkedIn`}
-                        >
-                          <Linkedin className="h-4 w-4" />
-                        </a>
-                      )}
-                      {member.socialLinks.twitter && (
-                        <a 
-                          href={member.socialLinks.twitter} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
-                          aria-label={`${member.name} Twitter`}
-                        >
-                          <Twitter className="h-4 w-4" />
-                        </a>
-                      )}
-                      {member.socialLinks.github && (
-                        <a 
-                          href={member.socialLinks.github} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
-                          aria-label={`${member.name} GitHub`}
-                        >
-                          <Github className="h-4 w-4" />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            <div className="mt-10 text-center">
-              <Link 
-                href="/careers" 
-                className="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium group"
+                   {/* Team Section */}
+              <div 
+                className="mb-20 sm:mb-32" 
+                ref={(el: HTMLDivElement | null) => { sectionsRef.current['team-section'] = el }} 
+                id="team-section"
               >
-                Join Our Team
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </div>
-          </div>
+                <div className="text-center mb-12">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-600/20 mb-4">
+                    <Users className="h-6 w-6 text-blue-400" />
+                  </div>
+                  <h2 className="text-3xl sm:text-4xl font-bold mb-4">Meet Our Team</h2>
+                  <p className="text-gray-300 mb-3">
+                    The passionate professionals behind TechPoa Connect who are dedicated to our mission.
+                  </p>
+                </div>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {teamMembers.map((member) => (
+                    <div key={member.id} className="bg-blue-900/20 backdrop-blur-sm rounded-xl overflow-hidden border border-blue-800/50 transition-all hover:border-blue-600/50 group">
+                      <div className="h-60 bg-gradient-to-br from-blue-900 to-purple-900 relative">
+                        {/* Using the actual image from the member data */}
+                        <img 
+                          src={member.image} 
+                          alt={`${member.name} - ${member.role}`} 
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                        {/* Fallback if image fails to load */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="text-4xl font-bold text-blue-500/30">{member.name.charAt(0)}</div>
+                        </div>
+                      </div>
+                      
+                      <div className="p-6">
+                        <h3 className="text-xl font-semibold">{member.name}</h3>
+                        <p className="text-blue-400 mb-3">{member.role}</p>
+                        
+                        <p className={`text-gray-300 text-sm mb-4 ${expandedTeamMember === member.id ? '' : 'line-clamp-3'}`}>
+                          {member.bio}
+                        </p>
+                        
+                        {member.bio.length > 150 && (
+                          <button
+                            onClick={() => toggleTeamMember(member.id)}
+                            className="text-blue-400 hover:text-blue-300 text-sm inline-flex items-center mb-4"
+                          >
+                            {expandedTeamMember === member.id ? 'Read Less' : 'Read More'}
+                            <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${expandedTeamMember === member.id ? 'rotate-180' : ''}`} />
+                          </button>
+                        )}
+                        
+                        <div className="flex space-x-3">
+                          {member.socialLinks.linkedin && (
+                            <a 
+                              href={member.socialLinks.linkedin} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
+                              aria-label={`${member.name} LinkedIn`}
+                            >
+                              <Linkedin className="h-4 w-4" />
+                            </a>
+                          )}
+                          {member.socialLinks.twitter && (
+                            <a 
+                              href={member.socialLinks.twitter} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
+                              aria-label={`${member.name} Twitter`}
+                            >
+                              <Twitter className="h-4 w-4" />
+                            </a>
+                          )}
+                          {member.socialLinks.github && (
+                            <a 
+                              href={member.socialLinks.github} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
+                              aria-label={`${member.name} GitHub`}
+                            >
+                              <Github className="h-4 w-4" />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="mt-10 text-center">
+                  <Link 
+                    href="/careers" 
+                    className="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium group"
+                  >
+                    Join Our Team
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
+              </div>
           
           {/* Testimonials Section */}
           <div 
@@ -941,115 +961,124 @@ useEffect(() => {
           </div>
           
           {/* Location and Contact */}
-          <div 
-            className="mb-20 sm:mb-32" 
-            ref={(el: HTMLDivElement | null) => { sectionsRef.current['contact-section'] = el }} 
-            id="contact-section"
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-              <div>
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-600/20 mb-4">
-                  <MapPin className="h-6 w-6 text-blue-400" />
-                </div>
-                <h2 className="text-3xl font-bold mb-4">Our Location</h2>
-                <p className="text-gray-300 text-lg mb-6">
-                  Located in the heart of Nairobi, our innovation center serves as a hub for tech education, 
-                  development, and community events.
-                </p>
-                
-                <div className="space-y-4 mb-8">
-                  <div className="flex items-start">
-                    <div className="bg-blue-800/50 p-2 rounded-lg mr-3 text-blue-400">
-                      <MapPin className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">TechPoa Innovation Center</h3>
-                      <p className="text-gray-300">Ngong Road, Nairobi, Kenya</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="bg-blue-800/50 p-2 rounded-lg mr-3 text-blue-400">
-                      <Mail className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Email</h3>
-                      <a href="mailto:info@techpoa.com" className="text-blue-400 hover:text-blue-300 transition-colors">
-                        info@techpoa.com
-                      </a>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="bg-blue-800/50 p-2 rounded-lg mr-3 text-blue-400">
-                      <Phone className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Phone</h3>
-                      <a href="tel:+254716687177" className="text-blue-400 hover:text-blue-300 transition-colors">
-                        +254 716 687 177
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="flex space-x-4">
-                  <a 
-                    href="https://www.facebook.com/profile.php?id=61573759510352" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
-                    aria-label="Facebook"
-                  >
-                    <Facebook className="h-5 w-5" />
-                  </a>
-                  <a 
-                    href="https://x.com/Techpoa_connect" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
-                    aria-label="Twitter"
-                  >
-                    <Twitter className="h-5 w-5" />
-                  </a>
-                  <a 
-                    href="https://www.linkedin.com/in/birisio-joseph-ba6609355" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
-                    aria-label="LinkedIn"
-                  >
-                    <Linkedin className="h-5 w-5" />
-                  </a>
-                  <a 
-                    href="https://www.instagram.com/techpoa_connect" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
-                    aria-label="Instagram"
-                  >
-                    <Instagram className="h-5 w-5" />
-                  </a>
-                  <a 
-                    href="https://github.com/techpoa" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
-                    aria-label="GitHub"
-                  >
-                    <Github className="h-5 w-5" />
-                  </a>
-                </div>
-              </div>
-              
-              <div className="h-80 sm:h-96 bg-gradient-to-br from-blue-900 to-purple-900 rounded-xl overflow-hidden relative">
-                {/* This would be replaced with an actual map */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-blue-500/50 text-2xl">Interactive Map</div>
-                </div>
-              </div>
-            </div>
+<div 
+  className="mb-20 sm:mb-32" 
+  ref={(el: HTMLDivElement | null) => { sectionsRef.current['contact-section'] = el }} 
+  id="contact-section"
+>
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+    <div>
+      <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-600/20 mb-4">
+        <MapPin className="h-6 w-6 text-blue-400" />
+      </div>
+      <h2 className="text-3xl font-bold mb-4">Our Location</h2>
+      <p className="text-gray-300 text-lg mb-6">
+        Located in the heart of Nairobi, our innovation center serves as a hub for tech education, 
+        development, and community events.
+      </p>
+      
+      <div className="space-y-4 mb-8">
+        <div className="flex items-start">
+          <div className="bg-blue-800/50 p-2 rounded-lg mr-3 text-blue-400">
+            <MapPin className="h-5 w-5" />
           </div>
+          <div>
+            <h3 className="font-semibold mb-1">TechPoa Innovation Center</h3>
+            <p className="text-gray-300">Ngong Road, Nairobi, Kenya</p>
+          </div>
+        </div>
+        
+        <div className="flex items-start">
+          <div className="bg-blue-800/50 p-2 rounded-lg mr-3 text-blue-400">
+            <Mail className="h-5 w-5" />
+          </div>
+          <div>
+            <h3 className="font-semibold mb-1">Email</h3>
+            <a href="mailto:info@techpoa.com" className="text-blue-400 hover:text-blue-300 transition-colors">
+              info@techpoa.com
+            </a>
+          </div>
+        </div>
+        
+        <div className="flex items-start">
+          <div className="bg-blue-800/50 p-2 rounded-lg mr-3 text-blue-400">
+            <Phone className="h-5 w-5" />
+          </div>
+          <div>
+            <h3 className="font-semibold mb-1">Phone</h3>
+            <a href="tel:+254716687177" className="text-blue-400 hover:text-blue-300 transition-colors">
+              +254 716 687 177
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div className="flex space-x-4">
+        <a 
+          href="https://www.facebook.com/profile.php?id=61573759510352" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
+          aria-label="Facebook"
+        >
+          <Facebook className="h-5 w-5" />
+        </a>
+        <a 
+          href="https://x.com/Techpoa_connect" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
+          aria-label="Twitter"
+        >
+          <Twitter className="h-5 w-5" />
+        </a>
+        <a 
+          href="https://www.linkedin.com/in/joseph-sagwe" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
+          aria-label="LinkedIn"
+        >
+          <Linkedin className="h-5 w-5" />
+        </a>
+        <a 
+          href="https://www.instagram.com/techpoa_connect" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
+          aria-label="Instagram"
+        >
+          <Instagram className="h-5 w-5" />
+        </a>
+        <a 
+          href="https://github.com/techpoa" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="bg-blue-800/50 p-2 rounded-full hover:bg-blue-700/70 transition-colors"
+          aria-label="GitHub"
+        >
+          <Github className="h-5 w-5" />
+        </a>
+      </div>
+    </div>
+    
+    <div className="h-80 sm:h-96 bg-gradient-to-br from-blue-900 to-purple-900 rounded-xl overflow-hidden relative">
+      {/* Interactive Google Map */}
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7880203581154!2d36.7803!3d-1.2980!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f109996536c39%3A0x4eb6d6e1f4b5fee0!2sNgong%20Rd%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1713100215021!5m2!1sen!2ske" 
+        className="absolute inset-0 w-full h-full border-0" 
+        allowFullScreen={true} 
+        loading="lazy" 
+        referrerPolicy="no-referrer-when-downgrade"
+        title="TechPoa Innovation Center Location"
+        aria-label="Google Maps showing TechPoa Innovation Center location"
+      ></iframe>
+      
+      {/* Gradient overlay to match the site's theme */}
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-blue-900/20 to-purple-900/20 z-10"></div>
+    </div>
+  </div>
+</div>
           
           {/* CTA Section */}
           <div 

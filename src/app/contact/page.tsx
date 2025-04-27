@@ -625,7 +625,7 @@ export default function Contact() {
                       <Twitter className="h-3.5 w-3.5" />
                     </a>
                     <a 
-                      href="https://www.linkedin.com/in/birisio-joseph-ba6609355" 
+                      href="https://www.linkedin.com/in/joseph-sagwe" 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="bg-blue-800/40 p-1.5 rounded-full hover:bg-blue-700/60 transition-colors"
@@ -639,74 +639,83 @@ export default function Contact() {
             </div>
           </div>
           
-          {/* Map Section */}
-          <div className="mt-12 bg-blue-900/30 border border-blue-800/50 rounded-lg p-5 backdrop-blur-sm">
-            <h2 className="text-xl font-semibold mb-6">Visit Our Office</h2>
-            
-            <div className="h-64 sm:h-80 md:h-96 bg-gray-800 rounded-lg overflow-hidden relative">
-              {/* Placeholder for a real map */}
-              <div className="absolute inset-0 bg-blue-900/50 flex flex-col items-center justify-center text-center p-8">
-                <MapPin className="h-12 w-12 text-blue-400 mb-4" />
-                <h3 className="text-xl font-bold">TechPoa Innovation Center</h3>
-                <p className="text-gray-300 mt-2">
-                  Ngong Road, Nairobi, Kenya
-                </p>
-                <a 
-                  href="https://goo.gl/maps/example"
-                  target="_blank"
-                  rel="noopener noreferrer" 
-                  className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 transition-colors rounded-md text-white font-medium inline-flex items-center"
-                >
-                  <Globe className="mr-2 h-4 w-4" />
-                  View on Google Maps
-                </a>
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-              <div>
-                <h3 className="text-lg font-medium mb-3 flex items-center">
-                  <Clock className="h-5 w-5 mr-2 text-blue-400" />
-                  Office Hours
-                </h3>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex justify-between">
-                    <span className="text-gray-300">Monday - Friday:</span>
-                    <span className="text-blue-300">9:00 AM - 5:00 PM EAT</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span className="text-gray-300">Saturday:</span>
-                    <span className="text-blue-300">10:00 AM - 2:00 PM EAT</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span className="text-gray-300">Sunday:</span>
-                    <span className="text-blue-300">Closed</span>
-                  </li>
-                </ul>
-              </div>
-              
-              <div>
-                <h3 className="text-lg font-medium mb-3 flex items-center">
-                  <MessageSquare className="h-5 w-5 mr-2 text-blue-400" />
-                  Support Availability
-                </h3>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex justify-between">
-                    <span className="text-gray-300">Email Support:</span>
-                    <span className="text-blue-300">24/7</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span className="text-gray-300">Phone Support:</span>
-                    <span className="text-blue-300">9:00 AM - 5:00 PM EAT (Weekdays)</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span className="text-gray-300">Live Chat:</span>
-                    <span className="text-blue-300">8:00 AM - 8:00 PM EAT (Weekdays)</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+                      {/* Map Section */}
+                <div className="mt-12 bg-blue-900/30 border border-blue-800/50 rounded-lg p-5 backdrop-blur-sm">
+                  <h2 className="text-xl font-semibold mb-6">Visit Our Office</h2>
+                  
+                  <div className="h-64 sm:h-80 md:h-96 rounded-lg overflow-hidden relative">
+                    {/* Interactive Google Map */}
+                    <iframe 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7880203581154!2d36.7803!3d-1.2980!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f109996536c39%3A0x4eb6d6e1f4b5fee0!2sNgong%20Rd%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1713100215021!5m2!1sen!2ske" 
+                      className="absolute inset-0 w-full h-full border-0" 
+                      allowFullScreen={true} 
+                      loading="lazy" 
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="TechPoa Innovation Center Location"
+                      aria-label="Google Maps showing TechPoa Innovation Center location"
+                    ></iframe>
+                    
+                    {/* Gradient overlay to match the site's theme */}
+                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-blue-900/40 to-purple-900/40 z-10"></div>
+                    
+                    {/* Map Actions - Floating panel */}
+                    <div className="absolute bottom-4 right-4 z-20">
+                      <a 
+                        href="https://goo.gl/maps/JKRXTUw8Su9cVahX7"
+                        target="_blank"
+                        rel="noopener noreferrer" 
+                        className="px-4 py-2 bg-blue-600 hover:bg-blue-700 transition-colors rounded-md text-white text-sm font-medium inline-flex items-center shadow-lg"
+                      >
+                        <Globe className="mr-2 h-4 w-4" />
+                        View on Google Maps
+                      </a>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div>
+                      <h3 className="text-lg font-medium mb-3 flex items-center">
+                        <Clock className="h-5 w-5 mr-2 text-blue-400" />
+                        Office Hours
+                      </h3>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex justify-between">
+                          <span className="text-gray-300">Monday - Friday:</span>
+                          <span className="text-blue-300">9:00 AM - 5:00 PM EAT</span>
+                        </li>
+                        <li className="flex justify-between">
+                          <span className="text-gray-300">Saturday:</span>
+                          <span className="text-blue-300">10:00 AM - 2:00 PM EAT</span>
+                        </li>
+                        <li className="flex justify-between">
+                          <span className="text-gray-300">Sunday:</span>
+                          <span className="text-blue-300">Closed</span>
+                        </li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h3 className="text-lg font-medium mb-3 flex items-center">
+                        <MessageSquare className="h-5 w-5 mr-2 text-blue-400" />
+                        Support Availability
+                      </h3>
+                      <ul className="space-y-2 text-sm">
+                        <li className="flex justify-between">
+                          <span className="text-gray-300">Email Support:</span>
+                          <span className="text-blue-300">24/7</span>
+                        </li>
+                        <li className="flex justify-between">
+                          <span className="text-gray-300">Phone Support:</span>
+                          <span className="text-blue-300">9:00 AM - 5:00 PM EAT (Weekdays)</span>
+                        </li>
+                        <li className="flex justify-between">
+                          <span className="text-gray-300">Live Chat:</span>
+                          <span className="text-blue-300">8:00 AM - 8:00 PM EAT (Weekdays)</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
           
           {/* FAQ Section */}
           <div className="mt-12 mb-8">
