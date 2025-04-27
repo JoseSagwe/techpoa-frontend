@@ -8,15 +8,11 @@ import {
   Globe,
   ArrowRight, 
   Search,
-  Filter,
   ChevronRight,
-  Github,
   ExternalLink,
-  Twitter,
   Code,
   BookOpen,
   UserPlus,
-  CheckCircle2,
   Star // Added missing Star import
 } from "lucide-react";
 
@@ -252,7 +248,7 @@ export default function Community() {
                     href="/signup"
                     className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 transition-colors rounded-md text-white font-medium group"
                   >
-                    Join Now - It's Free
+                    Join Now - It&apos;s Free
                     <UserPlus className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
@@ -536,7 +532,7 @@ export default function Community() {
               
               <h2 className="text-3xl font-bold mb-4">Ready to Join Our Community?</h2>
               <p className="text-gray-300 mb-8 max-w-xl mx-auto">
-                Join thousands of tech enthusiasts today and become part of East Africa's most vibrant tech community.
+                Join thousands of tech enthusiasts today and become part of East Africa&apos;s most vibrant tech community.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -545,7 +541,7 @@ export default function Community() {
                   className="px-6 py-3 bg-blue-600 hover:bg-blue-700 transition-colors rounded-md text-white font-medium inline-flex items-center justify-center"
                 >
                   <UserPlus className="mr-2 h-5 w-5" />
-                  Join Now - It's Free
+                  Join Now - It&apos;s Free
                 </Link>
                 <Link 
                   href="/community/learn-more" 
